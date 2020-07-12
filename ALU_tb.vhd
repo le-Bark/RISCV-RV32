@@ -25,15 +25,13 @@ end entity ALU_tb;
 architecture testbench of ALU_tb is
   -- Testbench DUT generics as constants
     constant register_size : integer := 32;
-    constant negative_1 : std_logic_vector := x"80000002";
-    constant negative_2 : std_logic_vector := "11000010000101110011001100110011";
-    constant negative_3 : std_logic_vector := "11000001010011001100110011001100";
   
   -- Testbench DUT ports as signals
     signal src_A       : std_logic_vector(register_size-1 downto 0);
     signal src_B       : std_logic_vector(register_size-1 downto 0);
     signal alu_control : std_logic_vector(4 downto 0);
     signal alu_result  : std_logic_vector(register_size-1 downto 0);
+    signal zero        : std_logic;
 
   begin
     -----------------------------------------------------------
@@ -190,6 +188,90 @@ architecture testbench of ALU_tb is
       wait for 100 ns;
       check_equal(alu_result, tmp, "0x80000001 < 1 = 0x00000000");
       
+      alu_control <= "10010";
+      src_A <= x"80000001";
+      src_B <= x"80000001";
+      wait for 100 ns;
+      check_equal(zero, '1', "0x80000001 = 0x80000001 = 1");
+      
+      alu_control <= "10010";
+      src_A <= x"80000000";
+      src_B <= x"80000001";
+      wait for 100 ns;
+      check_equal(zero, '0', "0x80000001 = 0x80000000 = 0");
+      
+      alu_control <= "10011";
+      src_A <= x"80000001";
+      src_B <= x"80000001";
+      wait for 100 ns;
+      check_equal(zero, '0', "0x80000001 /= 0x80000001 = 0");
+      
+      alu_control <= "10011";
+      src_A <= x"80000000";
+      src_B <= x"80000001";
+      wait for 100 ns;
+      check_equal(zero, '1', "0x80000001 /= 0x80000000 = 1");
+      
+      alu_control <= "10100";
+      src_A <= x"80000001";
+      src_B <= x"00000001";
+      wait for 100 ns;
+      check_equal(zero, '1', "0x80000001 < 0x00000001 = 1");
+      
+      alu_control <= "10100";
+      src_A <= x"00000001";
+      src_B <= x"80000001";
+      wait for 100 ns;
+      check_equal(zero, '0', "0x00000001 < 0x80000000 = 0");
+      
+      alu_control <= "10101";
+      src_A <= x"00000001";
+      src_B <= x"80000001";
+      wait for 100 ns;
+      check_equal(zero, '1', "0x00000001 >= 0x80000001 = 1");
+      
+      alu_control <= "10101";
+      src_A <= x"80000001";
+      src_B <= x"80000001";
+      wait for 100 ns;
+      check_equal(zero, '1', "0x80000001 >= 0x80000001 = 1");
+      
+      alu_control <= "10101";
+      src_A <= x"80000001";
+      src_B <= x"00000001";
+      wait for 100 ns;
+      check_equal(zero, '0', "0x80000001 >= 0x00000001 = 0");
+      
+      alu_control <= "10110";
+      src_A <= x"80000001";
+      src_B <= x"00000001";
+      wait for 100 ns;
+      check_equal(zero, '0', "0x80000001 < 0x00000001 = 0");
+      
+      alu_control <= "10110";
+      src_A <= x"00000001";
+      src_B <= x"80000001";
+      wait for 100 ns;
+      check_equal(zero, '1', "0x00000001 < 0x80000000 = 1");
+      
+      alu_control <= "10111";
+      src_A <= x"00000001";
+      src_B <= x"80000001";
+      wait for 100 ns;
+      check_equal(zero, '0', "0x00000001 >= 0x80000001 = 0");
+      
+      alu_control <= "10111";
+      src_A <= x"80000001";
+      src_B <= x"80000001";
+      wait for 100 ns;
+      check_equal(zero, '1', "0x80000001 >= 0x80000001 = 1");
+      
+      alu_control <= "10111";
+      src_A <= x"80000001";
+      src_B <= x"00000001";
+      wait for 100 ns;
+      check_equal(zero, '1', "0x80000001 >= 0x00000001 = 1");
+      
       
       test_runner_cleanup(runner);
   end process;
@@ -202,7 +284,8 @@ architecture testbench of ALU_tb is
         src_A       => src_A,
         src_B       => src_B,
         alu_control => alu_control,
-        alu_result  => alu_result
+        alu_result  => alu_result,
+        zero        => zero
     );
     
     end architecture testbench;
