@@ -109,8 +109,8 @@ begin
     
     DUT : entity work.fowarding_unit
     port map (
-        rs => rs,
-        rt => rt,
+        rs1 => rs,
+        rs2 => rt,
         rd_mem => rd_mem,
         rd_wb => rd_wb,
         mem_enable => mem_enable,

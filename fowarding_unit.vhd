@@ -9,8 +9,8 @@ library demo_lib;
 
 entity fowarding_unit is
     port(
-        rs : in std_logic_vector(4 downto 0);
-        rt : in std_logic_vector(4 downto 0);
+        rs1 : in std_logic_vector(4 downto 0);
+        rs2 : in std_logic_vector(4 downto 0);
         rd_mem : in std_logic_vector(4 downto 0);
         mem_enable : in std_logic;
         rd_wb : in std_logic_vector(4 downto 0);
@@ -22,22 +22,22 @@ end entity fowarding_unit;
 
 architecture fowarding_unit_arch of fowarding_unit is
 begin
-    process (rs,rd_mem,rd_wb,mem_enable,wb_enable)
+    process (rs1,rd_mem,rd_wb,mem_enable,wb_enable)
     begin
-        if (rs = rd_mem) and (mem_enable = '1') then
+        if (rs1 = rd_mem) and (mem_enable = '1') then
             foward_op_a <= "01";
-        elsif (rs = rd_wb) and (wb_enable = '1') then
+        elsif (rs1 = rd_wb) and (wb_enable = '1') then
             foward_op_a <= "10";
         else
             foward_op_a <= "00";
         end if;
     end process;
 
-    process (rt,rd_mem,rd_wb,mem_enable,wb_enable)
+    process (rs2,rd_mem,rd_wb,mem_enable,wb_enable)
     begin
-        if (rt = rd_mem) and (mem_enable = '1') then
+        if (rs2 = rd_mem) and (mem_enable = '1') then
             foward_op_b <= "01";
-        elsif (rt = rd_wb) and (wb_enable = '1') then
+        elsif (rs2 = rd_wb) and (wb_enable = '1') then
             foward_op_b <= "10";
         else
             foward_op_b <= "00";
