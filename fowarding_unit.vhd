@@ -1,11 +1,35 @@
-library ieee;
-use ieee.std_logic_1164.all;
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 07/12/2020 06:31:34 PM
+-- Design Name: 
+-- Module Name: fowarding_unit - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
 
-library vunit_lib;
-context vunit_lib.vunit_context;
 
-library demo_lib;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
 
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
 
 entity fowarding_unit is
     port(
