@@ -34,6 +34,7 @@ use ieee.math_real.all;
 entity data_memory is
   Port ( 
      clk     : in std_logic;
+     reset : in std_logic;
      address :  in std_logic_vector(31 downto 0);
      write_data : in std_logic_vector(31 downto 0);
      mem_read : in std_logic;
@@ -55,7 +56,11 @@ begin
 process(clk) is 
 begin
 if rising_edge(clk) then
-    if mem_write = '1' then
+    if reset = '1' then
+        for i in 0 to MEM_SIZE - 1 loop
+          data_mem(i) <= (others => '0');
+        end loop;
+    elsif mem_write = '1' then
         data_mem(to_integer(unsigned(address(ADDR_SIZE-1 downto 0)))) <= write_data;
     end if;
  end if; 

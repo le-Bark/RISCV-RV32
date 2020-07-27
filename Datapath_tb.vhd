@@ -111,9 +111,19 @@ begin
         clk <= '1';
         wait for 100 ns;
 
+        clk <= '0';
+        wait for 100 ns;
+        clk <= '1';
         wait for 100 ns;
 
-        check_equal(clk,'1',"test pc 0 on reset");
+        clk <= '0';
+        wait for 100 ns;
+        clk <= '1';
+        wait for 100 ns;
+
+        wait for 100 ns;
+
+        --check_equal(clk,'1',"test pc 0 on reset");
 
 
 
@@ -280,6 +290,7 @@ begin
   Data_memory_1 : Data_memory
     port map (
       clk => clk,
+      reset => reset,
       address => MEM_AluResult,
       write_data => MEM_writeData_store,
       mem_read => MEM_M(7),

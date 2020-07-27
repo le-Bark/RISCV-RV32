@@ -40,7 +40,7 @@ architecture rtl of ALU is
 	signal sign_src_A_sig       : signed(register_size-1 downto 0);
 	signal sign_src_B_sig       : signed(register_size-1 downto 0);
 	signal MUL_sig              : unsigned((2*register_size)-1 downto 0);
-	signal MULHSU_sig           : unsigned((2*register_size)-1 downto 0);
+	signal MULHSU_sig           : signed((2*register_size)-1 downto 0);
 	signal MULHU_sig            : unsigned((2*register_size)-1 downto 0);
 	signal compare_signed_sig   : unsigned(1 downto 0);
 	signal compare_unsigned_sig : unsigned(1 downto 0);
@@ -53,7 +53,7 @@ begin
 	sign_src_A_sig       <= signed(src_A);
 	sign_src_B_sig       <= signed(src_B);
 	MUL_sig              <= unsigned(sign_src_A_sig * sign_src_B_sig);
-	MULHSU_sig           <= unsigned(sign_src_A_sig * to_integer(uns_src_B_sig));
+	MULHSU_sig           <= resize(sign_src_A_sig * signed('0' & uns_src_B_sig),2*register_size);
 	MULHU_sig            <= uns_src_A_sig * uns_src_B_sig;
 	compare_signed_sig   <= "01" when (sign_src_A_sig < sign_src_B_sig) else "00";
 	compare_unsigned_sig <= "01" when (uns_src_A_sig < uns_src_B_sig) else "00";

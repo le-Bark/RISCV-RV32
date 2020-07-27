@@ -182,6 +182,7 @@ component instruction_mem is
   component Data_memory is
     Port (
       clk : in std_logic;
+      reset : in std_logic;
       address : in std_logic_vector(31 downto 0);
       write_data : in std_logic_vector(31 downto 0);
       mem_read : in std_logic;
