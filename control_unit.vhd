@@ -44,9 +44,9 @@ entity control_unit is
 end control_unit;
 
 architecture control of control_unit is
-signal opcode : std_logic_vector (6 downto 0) := instruction(6 downto 0);
-signal funct3 : std_logic_vector (2 downto 0) := instruction(14 downto 12);
-signal funct7 : std_logic_vector (6 downto 0) := instruction(31 downto 25);
+signal opcode : std_logic_vector (6 downto 0);
+signal funct3 : std_logic_vector (2 downto 0);
+signal funct7 : std_logic_vector (6 downto 0);
 -- Ordre des bits de 12 a 0: 
 -- RegWrite(1) / Branch(1) / Decoded_Opcode(4) / MemRead(1) / MemWrite(1) / MemtoReg(1) / JAL(1) / JALR(1) / Flush(1)
 signal output : std_logic_vector (12 downto 0);
@@ -55,6 +55,11 @@ signal load_ctrl :std_logic_vector(2 downto 0);
 signal store_ctrl : std_logic_vector(2 downto 0);
 
 begin
+
+opcode <= instruction(6 downto 0);
+funct3 <= instruction(14 downto 12);
+funct7 <= instruction(31 downto 25);
+
 
 Process(opcode)
 begin
