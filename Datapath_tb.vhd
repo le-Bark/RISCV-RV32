@@ -84,34 +84,36 @@ begin
         wait for 100 ns;
         clk <= '1';
         wait for 100 ns;
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
-        wait for 100 ns;
-        clk <= '0';
         reset <= '0';
-        wait for 100 ns;
-
-
-        clk <= '1';
-        wait for 100 ns;
+    
         clk <= '0';
         wait for 100 ns;
         clk <= '1';
         wait for 100 ns;
+
         clk <= '0';
         wait for 100 ns;
         clk <= '1';
         wait for 100 ns;
+
         clk <= '0';
         wait for 100 ns;
         clk <= '1';
         wait for 100 ns;
+        
         clk <= '0';
         wait for 100 ns;
+        clk <= '1';
+        wait for 100 ns;
+        
+        clk <= '0';
+        wait for 100 ns;
+        clk <= '1';
+        wait for 100 ns;
 
+        wait for 100 ns;
 
-        check_equal(reset,'0',"test pc 0 on reset");
+        check_equal(clk,'1',"test pc 0 on reset");
 
 
 
@@ -176,7 +178,6 @@ begin
   Registers_1 : Registers
     port map (
       clk => clk,
-      reset => reset,
       reg_write => WB_WB(1),
       read_reg_1 => ID_Instruction (19 downto 15),
       read_reg_2 => ID_Instruction (24 downto 20),

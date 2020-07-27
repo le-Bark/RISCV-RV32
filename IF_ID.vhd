@@ -33,6 +33,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity IF_ID is
     Port ( clk : in std_logic;
+           reset : in std_logic;
            IF_Flush : in std_logic;
            stall : in std_logic;
            PC_signal : in std_logic_vector(31 downto 0);
@@ -49,7 +50,11 @@ begin
   IF_ID_process : process(clk,IF_Flush)
     begin
       if rising_edge(clk) then
-        if IF_Flush = '1' then 
+        if reset = '1' then
+          ID_PC_signal <= (others => '0');
+          ID_Instruction <= (others => '0');
+          ID_stall <= '0';
+        elsif IF_Flush = '1' then 
           ID_Instruction <= (others=>'0');
           ID_PC_signal <= PC_signal;
           ID_stall <= stall;

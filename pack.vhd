@@ -52,14 +52,16 @@ component instruction_mem is
   end component instruction_mem;
   
   component IF_ID is
-    Port ( clk : in std_logic;
-           IF_Flush : in std_logic;
-           stall : in std_logic;
-           PC_signal : in std_logic_vector(31 downto 0);
-           IF_Instruction : in std_logic_vector(31 downto 0);
-           ID_stall : out std_logic;
-           ID_PC_signal : out std_logic_vector(31 downto 0);
-           ID_Instruction : out std_logic_vector(31 downto 0));
+    Port ( 
+      clk : in std_logic;
+      reset : in std_logic;
+      IF_Flush : in std_logic;
+      stall : in std_logic;
+      PC_signal : in std_logic_vector(31 downto 0);
+      IF_Instruction : in std_logic_vector(31 downto 0);
+      ID_stall : out std_logic;
+      ID_PC_signal : out std_logic_vector(31 downto 0);
+      ID_Instruction : out std_logic_vector(31 downto 0));
   end component IF_ID;
   
   component hasard_detection_unit is
@@ -111,6 +113,7 @@ component instruction_mem is
   component ID_EX is
     Port ( 
       clk : in std_logic;
+      reset : in std_logic;
       Result_mux_control : in std_logic_vector(14 downto 0);
       ID_Instruction : in std_logic_vector(31 downto 0);
       ID_read_data_1 : in std_logic_vector(31 downto 0);
@@ -163,6 +166,7 @@ component instruction_mem is
   component EX_MEM is
     Port ( 
       clk : in std_logic;
+      reset : in std_logic;
       EX_M : in std_logic_vector(7 downto 0);
       EX_WB : in std_logic_vector(1 downto 0);
       AluResult_sig : in std_logic_vector(31 downto 0);
@@ -187,15 +191,16 @@ component instruction_mem is
   
   component MEM_WB is
     Port ( 
-    clk : in std_logic;
-    MEM_WB : in std_logic_vector(1 downto 0);
-    MEM_ReadData : in std_logic_vector(31 downto 0);
-    MEM_AluResult : in std_logic_vector(31 downto 0);
-    MEM_Register_Rd : in std_logic_vector(4 downto 0);
-    WB_WB : out std_logic_vector(1 downto 0);
-    WB_ReadData : out std_logic_vector(31 downto 0);
-    WB_AluResult : out std_logic_vector(31 downto 0);
-    WB_Register_Rd : out std_logic_vector(4 downto 0));
+      clk : in std_logic;
+      reset : in std_logic;
+      MEM_WB : in std_logic_vector(1 downto 0);
+      MEM_ReadData : in std_logic_vector(31 downto 0);
+      MEM_AluResult : in std_logic_vector(31 downto 0);
+      MEM_Register_Rd : in std_logic_vector(4 downto 0);
+      WB_WB : out std_logic_vector(1 downto 0);
+      WB_ReadData : out std_logic_vector(31 downto 0);
+      WB_AluResult : out std_logic_vector(31 downto 0);
+      WB_Register_Rd : out std_logic_vector(4 downto 0));
   end component MEM_WB;
   
 

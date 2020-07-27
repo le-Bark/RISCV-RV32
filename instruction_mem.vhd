@@ -44,13 +44,13 @@ architecture mem of instruction_mem is
 	TYPE romtype is array (0 to mem_size) of std_logic_vector(31 downto 0);
 
 		constant instruction_rom : romtype := (
-				0  => X"00000000" ,
-				1  => X"00000001" ,
-				2  => X"00000002" ,
-				3  => X"00000003" ,
-				4  => X"00000004" ,
-				5  => X"00000005" ,
-				6  => X"00000006" ,
+				0  => "00100111100000000000111111110000" , -- ADDI 3,0,FF
+				1  => "01100110000000000000000000000000" , -- ADD  0,0,0
+				2  => "01100110000000000000000000000000" , -- ADD  0,0,0
+				3  => "01100110000000000000000000000000" , -- ADD  0,0,0
+				4  => "01100110000000000000000000000000" , -- ADD  0,0,0
+				5  => "01100110000000000000000000000000" , -- ADD  0,0,0
+				6  => "01100110000000000000000000000000" , -- ADD  0,0,0
 				7  => X"00000007" ,
 				8  => X"00000008" ,
 				9  => X"00000009" ,
@@ -80,7 +80,7 @@ architecture mem of instruction_mem is
 	begin
 		process(pc)
 		begin
-			instruction <= instruction_rom(to_integer(unsigned(pc)));
+			instruction <= instruction_rom(to_integer(shift_right(unsigned(pc),2)));
 		end process;
 	end  mem;
 

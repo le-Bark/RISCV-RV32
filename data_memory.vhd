@@ -44,7 +44,7 @@ end data_memory;
 
 architecture mem of data_memory is
 
-constant MEM_SIZE : integer := 1000;
+constant MEM_SIZE : integer := 1024;
 constant ADDR_SIZE : integer := integer(ceil(log2(real(MEM_SIZE))));
 type ram_type is array (MEM_SIZE-1 downto 0) of std_logic_vector(31 downto 0);
 signal data_mem : ram_type;

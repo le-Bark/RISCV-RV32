@@ -57,8 +57,8 @@ begin
 	MULHU_sig            <= uns_src_A_sig * uns_src_B_sig;
 	compare_signed_sig   <= "01" when (sign_src_A_sig < sign_src_B_sig) else "00";
 	compare_unsigned_sig <= "01" when (uns_src_A_sig < uns_src_B_sig) else "00";
-	unsigned_div_sig     <= uns_src_A_sig / uns_src_B_sig;
-	signed_div_sig       <= sign_src_A_sig / sign_src_B_sig;
+	unsigned_div_sig     <= (others => '0') when (uns_src_B_sig = 0) else uns_src_A_sig / uns_src_B_sig;
+	signed_div_sig       <= (others => '0') when (sign_src_B_sig = 0) else sign_src_A_sig / sign_src_B_sig;
 
 	process(src_A, src_B, alu_control, uns_src_A_sig, uns_src_B_sig, sign_src_A_sig, sign_src_B_sig, 
 	        MUL_sig, MULHSU_sig, MULHU_sig, compare_signed_sig, compare_unsigned_sig, unsigned_div_sig, signed_div_sig)

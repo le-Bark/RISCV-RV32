@@ -33,6 +33,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity EX_MEM is
     Port ( clk : in std_logic;
+           reset : in std_logic;
            EX_M : in std_logic_vector(7 downto 0);
            EX_WB : in std_logic_vector(1 downto 0);
            AluResult_sig : in std_logic_vector(31 downto 0);
@@ -52,11 +53,19 @@ begin
   EX_MEM_process : process(clk)
     begin
       if rising_edge(clk) then
-        MEM_M <= EX_M;
-        MEM_WB <= EX_WB;
-        MEM_AluResult <=  AluResult_sig;
-        MEM_ALU_src_B <= ALU_src_B;
-        MEM_Register_Rd <= EX_Register_Rd;
+        if reset = '1' then
+          MEM_M <= (others => '0');
+          MEM_WB <= (others => '0');
+          MEM_AluResult <= (others => '0');
+          MEM_ALU_src_B <= (others => '0');
+          MEM_Register_Rd <= (others => '0');
+        else
+          MEM_M <= EX_M;
+          MEM_WB <= EX_WB;
+          MEM_AluResult <=  AluResult_sig;
+          MEM_ALU_src_B <= ALU_src_B;
+          MEM_Register_Rd <= EX_Register_Rd;
+        end if;
       end if;
     end process;
 end EX_MEM_arch;

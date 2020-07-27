@@ -45,7 +45,7 @@ entity registers is
 end registers;
 
 	architecture reg of registers is
-	type ramtype is array (15 downto 0) of std_logic_vector(31 downto 0);
+	type ramtype is array (31 downto 0) of std_logic_vector(31 downto 0);
 	signal reg_mem : ramtype;
 
 	begin

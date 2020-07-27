@@ -65,6 +65,7 @@ begin
       if rising_edge(clk) then
         if reset = '1' then 
           PC_out <= (others=>'0');
+          PC_signal <= (others=>'0');
         else
           PC_signal <= PCnextbr;
           PC_out <= PCnextbr;

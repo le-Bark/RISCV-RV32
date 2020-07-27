@@ -33,6 +33,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity ID_EX is
     Port ( clk : in std_logic;
+           reset : in std_logic;
            Result_mux_control : in std_logic_vector(14 downto 0);
            ID_Instruction : in std_logic_vector(31 downto 0);
            ID_read_data_1 : in std_logic_vector(31 downto 0);
@@ -58,17 +59,31 @@ begin
   ID_EX_process : process(clk)
     begin
       if rising_edge(clk) then
-        EX_EX <= Result_mux_control(4 downto 0);
-        EX_M <= Result_mux_control(12 downto 5);
-        EX_WB <= Result_mux_control(14 downto 13);
-        EX_funct3 <= ID_Instruction (14 downto 12);
-        EX_funct7 <= ID_Instruction (31 downto 25);
-        EX_read_data_1 <=  ID_read_data_1;
-        EX_read_data_2 <=  ID_read_data_2; 
-        EX_Register_Rs1 <=  ID_Instruction (19 downto 15);
-        EX_Register_Rs2 <=  ID_Instruction (24 downto 20);
-        EX_Register_Rd <=  ID_Instruction (11 downto 7);
-        EX_SignImmSh <= SignImmSh;
+        if reset = '1' then
+          EX_EX <=(others => '0');
+          EX_M <=(others => '0');
+          EX_WB <=(others => '0');
+          EX_funct3 <=(others => '0');
+          EX_funct7 <=(others => '0');
+          EX_read_data_1 <=(others => '0');
+          EX_read_data_2 <=(others => '0');
+          EX_Register_Rs1 <=(others => '0');
+          EX_Register_Rs2 <=(others => '0');
+          EX_Register_Rd <=(others => '0');
+          EX_SignImmSh <=(others => '0');
+        else
+          EX_EX <= Result_mux_control(4 downto 0);
+          EX_M <= Result_mux_control(12 downto 5);
+          EX_WB <= Result_mux_control(14 downto 13);
+          EX_funct3 <= ID_Instruction (14 downto 12);
+          EX_funct7 <= ID_Instruction (31 downto 25);
+          EX_read_data_1 <=  ID_read_data_1;
+          EX_read_data_2 <=  ID_read_data_2; 
+          EX_Register_Rs1 <=  ID_Instruction (19 downto 15);
+          EX_Register_Rs2 <=  ID_Instruction (24 downto 20);
+          EX_Register_Rd <=  ID_Instruction (11 downto 7);
+          EX_SignImmSh <= SignImmSh;
+        end if;
       end if;
     end process;
 
