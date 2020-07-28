@@ -42,7 +42,8 @@ package pack is
       SignImmSh : in std_logic_vector(31 downto 0);
       ID_PC_signal : in std_logic_vector(31 downto 0);
       ID_read_data_1 : in std_logic_vector(31 downto 0);
-      PC_out : out std_logic_vector(31 downto 0));
+      PC_out : out std_logic_vector(31 downto 0);
+      PC_4_out : out std_logic_vector(31 downto 0));
   end component PC;
   
 component instruction_mem is
@@ -57,9 +58,11 @@ component instruction_mem is
       reset : in std_logic;
       IF_Flush : in std_logic;
       stall : in std_logic;
+      IF_PC_4 : in std_logic_vector(31 downto 0);
       PC_signal : in std_logic_vector(31 downto 0);
       IF_Instruction : in std_logic_vector(31 downto 0);
       ID_stall : out std_logic;
+      ID_PC_4 : out std_logic_vector(31 downto 0);
       ID_PC_signal : out std_logic_vector(31 downto 0);
       ID_Instruction : out std_logic_vector(31 downto 0));
   end component IF_ID;
@@ -74,7 +77,7 @@ component instruction_mem is
   component control_unit is
     Port (
       instruction : in std_logic_vector(31 downto 0);
-      EX_ALU_op   : out std_logic_vector(4 downto 0);
+      EX_ALU_op   : out std_logic_vector(5 downto 0);
       WB_ctrl  : out std_logic_vector(1 downto 0);
       MEM_ctrl :  out std_logic_vector(7 downto 0);
       ID_ctrl  : out std_logic_vector(2 downto 0);
@@ -114,19 +117,21 @@ component instruction_mem is
     Port ( 
       clk : in std_logic;
       reset : in std_logic;
-      Result_mux_control : in std_logic_vector(14 downto 0);
+      Result_mux_control : in std_logic_vector(15 downto 0);
       ID_Instruction : in std_logic_vector(31 downto 0);
       ID_read_data_1 : in std_logic_vector(31 downto 0);
       ID_read_data_2 : in std_logic_vector(31 downto 0);
+      ID_PC_4 : in std_logic_vector(31 downto 0);
       SignImmSh : in std_logic_vector(31 downto 0);
       EX_SignImmSh : out std_logic_vector(31 downto 0);
-      EX_EX : out std_logic_vector(4 downto 0);
+      EX_EX : out std_logic_vector(5 downto 0);
       EX_M : out std_logic_vector(7 downto 0);
       EX_WB : out std_logic_vector(1 downto 0);
       EX_funct3 : out std_logic_vector(2 downto 0);
       EX_funct7 : out std_logic_vector(6 downto 0);
       EX_read_data_1 : out std_logic_vector(31 downto 0);
       EX_read_data_2 : out std_logic_vector(31 downto 0);
+      EX_PC_4 : out std_logic_vector(31 downto 0);
       EX_Register_Rs1 : out std_logic_vector(4 downto 0);
       EX_Register_Rs2 : out std_logic_vector(4 downto 0);
       EX_Register_Rd : out std_logic_vector(4 downto 0));

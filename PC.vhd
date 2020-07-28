@@ -40,7 +40,8 @@ entity PC is
            SignImmSh : in std_logic_vector(31 downto 0);
            ID_PC_signal : in std_logic_vector(31 downto 0);
            ID_read_data_1 : in std_logic_vector(31 downto 0);
-           PC_out : out std_logic_vector(31 downto 0));
+           PC_out : out std_logic_vector(31 downto 0);
+           PC_4_out : out std_logic_vector(31 downto 0));           
 end PC;
 
 architecture PC_arch of PC is
@@ -53,7 +54,8 @@ signal PCjumpreg : std_logic_vector(31 downto 0);
 begin
 
   IF_PCplus4 <= std_logic_vector(unsigned(PC_signal) +4 );
-  
+  PC_4_out <= IF_PCplus4;
+
   PCbranch <=  std_logic_vector(unsigned(ID_PC_signal) + unsigned(SignImmSh));
   PCjumpreg <=  std_logic_vector(unsigned(ID_read_data_1) + unsigned(SignImmSh));
   
