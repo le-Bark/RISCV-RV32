@@ -266,27 +266,27 @@ begin
       MEM_Register_Rd => MEM_Register_Rd);
       
   MEM_store <= MEM_M(2 downto 0);
-  MEM_writeData_store <= std_logic_vector(resize(signed(MEM_ALU_src_B(7 downto 0)),32)) when MEM_store = "000" else
-						 std_logic_vector(resize(signed(MEM_ALU_src_B(15 downto 0)),32)) when MEM_store = "001" else
-						 MEM_ALU_src_B;
+  MEM_load <= MEM_M(5 downto 3);
 							 
-
   Data_memory_1 : Data_memory
     port map (
       clk => clk,
       reset => reset,
       address => MEM_AluResult,
-      write_data => MEM_writeData_store,
+      write_data => MEM_ALU_src_B,
       mem_read => MEM_M(7),
+      store_ctrl=> MEM_store,
       mem_write => MEM_M(6),
       read_data => MEM_ReadData);
       
-  MEM_load <= MEM_M(5 downto 3);
+ 
   MEM_readData_load   <= std_logic_vector(resize(signed(MEM_ReadData(7 downto 0)),32)) when MEM_load = "000" else
 						 std_logic_vector(resize(signed(MEM_ReadData(15 downto 0)),32)) when MEM_load = "001" else
 						 std_logic_vector(resize(unsigned(MEM_ReadData(7 downto 0)),32)) when MEM_load = "100" else
-						 std_logic_vector(resize(unsigned(MEM_ReadData(15 downto 0)),32)) when MEM_load = "001" else
+						 std_logic_vector(resize(unsigned(MEM_ReadData(15 downto 0)),32)) when MEM_load = "101" else
 						 MEM_ReadData;
+
+
   MEM_WB_1 : MEM_WB
     port map (
     clk => clk,
