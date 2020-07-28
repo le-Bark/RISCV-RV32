@@ -47,7 +47,7 @@ signal J_pre_imm: std_logic_vector(20 downto 0);
 
 begin
 
-process(inst)
+process(inst,instruction)
 begin
  case inst is
     when "000" => pre_imm <= (others => '0');

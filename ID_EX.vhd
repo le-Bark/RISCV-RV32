@@ -34,19 +34,21 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity ID_EX is
     Port ( clk : in std_logic;
            reset : in std_logic;
-           Result_mux_control : in std_logic_vector(14 downto 0);
+           Result_mux_control : in std_logic_vector(15 downto 0);
            ID_Instruction : in std_logic_vector(31 downto 0);
            ID_read_data_1 : in std_logic_vector(31 downto 0);
            ID_read_data_2 : in std_logic_vector(31 downto 0);
+           ID_PC_4 : in std_logic_vector(31 downto 0);
            SignImmSh : in std_logic_vector(31 downto 0);
            EX_SignImmSh : out std_logic_vector(31 downto 0);
-           EX_EX : out std_logic_vector(4 downto 0);
+           EX_EX : out std_logic_vector(5 downto 0);
            EX_M : out std_logic_vector(7 downto 0);
            EX_WB : out std_logic_vector(1 downto 0);
            EX_funct3 : out std_logic_vector(2 downto 0);
            EX_funct7 : out std_logic_vector(6 downto 0);
            EX_read_data_1 : out std_logic_vector(31 downto 0);
            EX_read_data_2 : out std_logic_vector(31 downto 0);
+           EX_PC_4 : out std_logic_vector(31 downto 0);
            EX_Register_Rs1 : out std_logic_vector(4 downto 0);
            EX_Register_Rs2 : out std_logic_vector(4 downto 0);
            EX_Register_Rd : out std_logic_vector(4 downto 0));
@@ -71,10 +73,11 @@ begin
           EX_Register_Rs2 <=(others => '0');
           EX_Register_Rd <=(others => '0');
           EX_SignImmSh <=(others => '0');
+          EX_PC_4 <=(others => '0');
         else
-          EX_EX <= Result_mux_control(4 downto 0);
-          EX_M <= Result_mux_control(12 downto 5);
-          EX_WB <= Result_mux_control(14 downto 13);
+          EX_EX <= Result_mux_control(5 downto 0);
+          EX_M <= Result_mux_control(13 downto 6);
+          EX_WB <= Result_mux_control(15 downto 14);
           EX_funct3 <= ID_Instruction (14 downto 12);
           EX_funct7 <= ID_Instruction (31 downto 25);
           EX_read_data_1 <=  ID_read_data_1;
@@ -83,6 +86,7 @@ begin
           EX_Register_Rs2 <=  ID_Instruction (24 downto 20);
           EX_Register_Rd <=  ID_Instruction (11 downto 7);
           EX_SignImmSh <= SignImmSh;
+          EX_PC_4 <= ID_PC_4;
         end if;
       end if;
     end process;

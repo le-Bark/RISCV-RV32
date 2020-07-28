@@ -35,8 +35,8 @@ signal ID_ctrl : std_logic_vector(2 downto 0);
 signal inst_type : std_logic_vector(2 downto 0);
 signal MEM_load : std_logic_vector(2 downto 0);
 signal MEM_store: std_logic_vector(2 downto 0);
-signal EX_ctrl : std_logic_vector(4 downto 0);
-signal EX_EX : std_logic_vector(4 downto 0);
+signal EX_ctrl : std_logic_vector(5 downto 0);
+signal EX_EX : std_logic_vector(5 downto 0);
 signal EX_Register_Rs1 : std_logic_vector(4 downto 0);
 signal EX_Register_Rs2 : std_logic_vector(4 downto 0);
 signal EX_Register_Rd : std_logic_vector(4 downto 0);
@@ -47,8 +47,8 @@ signal EX_funct7 :std_logic_vector(6 downto 0);
 signal MEM_M : std_logic_vector(7 downto 0);
 signal EX_M : std_logic_vector(7 downto 0);
 signal MEM_ctrl : std_logic_vector(7 downto 0);
-signal Control_mux : std_logic_vector(14 downto 0);
-signal Result_mux_control : std_logic_vector(14 downto 0);
+signal Control_mux : std_logic_vector(15 downto 0);
+signal Result_mux_control : std_logic_vector(15 downto 0);
 signal ID_PC_signal : std_logic_vector(bus_size - 1 downto 0);
 signal PC_signal : std_logic_vector(bus_size - 1 downto 0);
 signal ID_SignImm : std_logic_vector(bus_size - 1 downto 0);
@@ -72,56 +72,33 @@ signal MEM_ALU_src_B : std_logic_vector(bus_size - 1 downto 0);
 signal MEM_ReadData : std_logic_vector(bus_size - 1 downto 0);
 signal MEM_writeData_store :std_logic_vector(bus_size - 1 downto 0);
 signal MEM_readData_load :std_logic_vector(bus_size - 1 downto 0);
+signal IF_PC_4 : std_logic_vector(bus_size - 1 downto 0);
+signal ID_PC_4 : std_logic_vector(bus_size - 1 downto 0);
+signal EX_PC_4 : std_logic_vector(bus_size - 1 downto 0);
+signal ALU_JMP : std_logic_vector(bus_size - 1 downto 0);
+
 
 begin
+
+    clk_gen : process
+    begin
+    clk <= '0';
+    wait for 100 ns;
+    clk <= '1';
+    wait for 100 ns;
+    end process clk_gen;
 
     main : process
     begin
         test_runner_setup(runner, runner_cfg);
-
-        reset <= '1';
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
-        wait for 100 ns;
-        reset <= '0';
-    
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
-        wait for 100 ns;
-
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
-        wait for 100 ns;
-
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
+        reset <= '1','0' after 200 ns;
         wait for 100 ns;
         
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
-        wait for 100 ns;
+        wait for 6*200 ns;
+
+        wait for 5*200 ns;
+
         
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
-        wait for 100 ns;
-
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
-        wait for 100 ns;
-
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
-        wait for 100 ns;
-
-        wait for 100 ns;
 
         --check_equal(clk,'1',"test pc 0 on reset");
 
@@ -145,9 +122,11 @@ begin
       reset => reset,
       IF_Flush => IF_Flush,
       stall => stall,
+      IF_PC_4 => IF_PC_4,
       PC_signal => PC_signal,
       IF_Instruction => IF_Instruction,
       ID_stall => ID_stall,
+      ID_PC_4 => ID_PC_4,
       ID_PC_signal => ID_PC_signal,
       ID_Instruction => ID_Instruction);
       
@@ -177,7 +156,8 @@ begin
       SignImmSh => SignImmSh,
       ID_PC_signal => ID_PC_signal,
       ID_read_data_1 => ID_read_data_1,
-      PC_out => PC_signal);
+      PC_out => PC_signal,
+      PC_4_out => IF_PC_4);
 
   Hazard_unit_1 : hasard_detection_unit
     port map (
@@ -205,7 +185,7 @@ begin
       branch_condition => PCsrc);
       
   Control_mux   <=   WB_ctrl & MEM_ctrl & EX_ctrl;
-  Result_mux_control   <= (others=>'0') when (stall = '1' or ID_stall = '1') else Control_mux;
+  Result_mux_control   <= (others=>'0') when (ID_stall = '1') else Control_mux;
   
   ID_EX_1 : ID_EX
     port map (
@@ -215,6 +195,7 @@ begin
       ID_Instruction => ID_Instruction,
       ID_read_data_1 => ID_read_data_1,
       ID_read_data_2 => ID_read_data_2,
+      ID_PC_4 => ID_PC_4,
       SignImmSh => SignImmSh,
       EX_SignImmSh => EX_SignImmSh,
       EX_EX => EX_EX,
@@ -224,6 +205,7 @@ begin
       EX_funct7 => EX_funct7,
       EX_read_data_1 => EX_read_data_1,
       EX_read_data_2 => EX_read_data_2,
+      EX_PC_4 => EX_PC_4,
       EX_Register_Rs1 => EX_Register_Rs1,
       EX_Register_Rs2 => EX_Register_Rs2,
       EX_Register_Rd => EX_Register_Rd);
@@ -255,12 +237,14 @@ begin
       decoded_opcode => EX_EX (3 downto 0),
       alu_result => AluResult_sig);
       
+  ALU_JMP <= EX_PC_4 when (EX_EX(5) = '1') else AluResult_sig;
+
   Fowarding_unit_1 : Fowarding_unit
     port map (
       rs1 => EX_Register_Rs1,
       rs2 => EX_Register_Rs2,
       rd_mem => MEM_Register_Rd,
-      mem_enable => MEM_WB_sig(0),
+      mem_enable => MEM_WB_sig(1),
       rd_wb => WB_Register_Rd,
       wb_enable => WB_WB(1),
       foward_op_a => FOWARD_OP_A,
@@ -272,7 +256,7 @@ begin
       reset => reset,
       EX_M => EX_M,
       EX_WB => EX_WB,
-      AluResult_sig => AluResult_sig,
+      AluResult_sig => ALU_JMP,
       ALU_src_B => ALU_src_B,
       EX_Register_Rd => EX_Register_Rd,
       MEM_M => MEM_M,

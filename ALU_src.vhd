@@ -45,8 +45,8 @@ begin
 
   ALU_src <= 
     EX_read_data when (FOWARD_OP = "00") else
-    WB_Result when (FOWARD_OP = "01") else
-    MEM_AluResult;
+    MEM_AluResult when (FOWARD_OP = "01") else
+    WB_Result;
     
 end ALU_src_arch;
 
