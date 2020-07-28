@@ -60,9 +60,11 @@ end registers;
 	end process;
 
 	read_data_1 <= (others => '0') when to_integer(unsigned(read_reg_1)) = 0 else
+					write_data when ( (reg_write = '1') and (write_reg = read_reg_1)) else
 					reg_mem(to_integer(unsigned(read_reg_1)));
 
 	read_data_2 <= (others => '0') when to_integer(unsigned(read_reg_2)) = 0 else
+					write_data when ( (reg_write = '1') and (write_reg = read_reg_2)) else
 					reg_mem(to_integer(unsigned(read_reg_2)));
 	
 	end architecture reg;

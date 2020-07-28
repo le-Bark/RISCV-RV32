@@ -80,63 +80,25 @@ signal ALU_JMP : std_logic_vector(bus_size - 1 downto 0);
 
 begin
 
+    clk_gen : process
+    begin
+    clk <= '0';
+    wait for 100 ns;
+    clk <= '1';
+    wait for 100 ns;
+    end process clk_gen;
+
     main : process
     begin
         test_runner_setup(runner, runner_cfg);
-
-        reset <= '1';
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
-        wait for 100 ns;
-        reset <= '0';
-    
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
-        wait for 100 ns;
-
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
-        wait for 100 ns;
-
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
+        reset <= '1','0' after 200 ns;
         wait for 100 ns;
         
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
-        wait for 100 ns;
+        wait for 6*200 ns;
+
+        wait for 5*200 ns;
+
         
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
-        wait for 100 ns;
-
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
-        wait for 100 ns;
-
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
-        wait for 100 ns;
-
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
-        wait for 100 ns;
-        
-        clk <= '0';
-        wait for 100 ns;
-        clk <= '1';
-        wait for 100 ns;
-
-        wait for 100 ns;
 
         --check_equal(clk,'1',"test pc 0 on reset");
 
