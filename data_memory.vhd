@@ -60,7 +60,11 @@ begin
     if rising_edge(clk) then
       if reset = '1' then
         for i in 0 to MEM_SIZE - 1 loop
-          data_mem(i) <= (others => '0');
+          if i = 0 then
+            data_mem(i) <= x"0A";
+            else
+            data_mem(i) <= (others => '0');
+            end if;
         end loop;
       elsif mem_write = '1' then
         case store_ctrl is
@@ -73,12 +77,11 @@ begin
                           data_mem(int_add +2) <= write_data(23 downto 16);
                           data_mem(int_add +3) <= write_data(31 downto 24);
         end case;
-       elsif mem_read = '1' then
-       read_data <= data_mem(int_add + 3) & data_mem(int_add + 2) & data_mem(int_add +1) & data_mem(int_add); 
       end if;
     end if;
   end process;
 
+  read_data <= data_mem(int_add + 3) & data_mem(int_add + 2) & data_mem(int_add +1) & data_mem(int_add); 
   
 
 end mem;

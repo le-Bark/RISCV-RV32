@@ -36,12 +36,10 @@ entity IF_ID is
            reset : in std_logic;
            IF_Flush : in std_logic;
            stall : in std_logic;
-           IF_PC_4 : in std_logic_vector(31 downto 0);
-           PC_signal : in std_logic_vector(31 downto 0);
+           IF_PC : in std_logic_vector(31 downto 0);
            IF_Instruction : in std_logic_vector(31 downto 0);
            ID_stall : out std_logic;
-           ID_PC_4 : out std_logic_vector(31 downto 0);
-           ID_PC_signal : out std_logic_vector(31 downto 0);
+           ID_PC : out std_logic_vector(31 downto 0);
            ID_Instruction : out std_logic_vector(31 downto 0));
 end IF_ID;
 
@@ -53,20 +51,17 @@ begin
     begin
       if rising_edge(clk) then
         if reset = '1' then
-          ID_PC_signal <= (others => '0');
           ID_Instruction <= (others => '0');
           ID_stall <= '0';
-          ID_PC_4 <= (others => '0');
+          ID_PC <= (others => '0');
         elsif IF_Flush = '1' then 
           ID_Instruction <= (others=>'0');
-          ID_PC_signal <= PC_signal;
           ID_stall <= stall;
-          ID_PC_4 <= IF_PC_4;
+          ID_PC <= IF_PC;
         else
-          ID_PC_signal <= PC_signal;
           ID_Instruction <= IF_Instruction;
           ID_stall <= stall;
-          ID_PC_4 <= IF_PC_4;
+          ID_PC <= IF_PC;
         end if;
       end if;
     end process;

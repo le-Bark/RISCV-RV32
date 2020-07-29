@@ -43,7 +43,8 @@ end ALU_control;
 architecture rtl of ALU_control is
 
 begin
-	alu_control <= "00000" when decoded_opcode = "0101" or decoded_opcode = "0110" or
+	alu_control <= "00000" when decoded_opcode = "0001" or decoded_opcode = "0010" or decoded_opcode = "0101" or 
+								decoded_opcode = "0110" or (decoded_opcode = "0011" and funct_3 = "000") or
 								(decoded_opcode = "0111" and funct_3 = "000") or
 								(decoded_opcode = "1000" and funct_3 = "000" and funct_7 = "0000000") else
 								"00001" when decoded_opcode = "1000" and funct_3 = "000" and funct_7 = "0100000" else

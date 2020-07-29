@@ -49,8 +49,6 @@ signal EX_M : std_logic_vector(7 downto 0);
 signal MEM_ctrl : std_logic_vector(7 downto 0);
 signal Control_mux : std_logic_vector(15 downto 0);
 signal Result_mux_control : std_logic_vector(15 downto 0);
-signal ID_PC_signal : std_logic_vector(bus_size - 1 downto 0);
-signal PC_signal : std_logic_vector(bus_size - 1 downto 0);
 signal ID_SignImm : std_logic_vector(bus_size - 1 downto 0);
 signal SignImmSh : std_logic_vector(bus_size - 1 downto 0);
 signal EX_SignImmSh : std_logic_vector(bus_size - 1 downto 0);
@@ -67,15 +65,15 @@ signal EX_read_data_1 : std_logic_vector(bus_size - 1 downto 0);
 signal EX_read_data_2 : std_logic_vector(bus_size - 1 downto 0);
 signal ALU_src_A : std_logic_vector(bus_size - 1 downto 0);
 signal ALU_src_B : std_logic_vector(bus_size - 1 downto 0);
-signal ALUSrc_result : std_logic_vector(bus_size - 1 downto 0);
+signal ALUSrc_result_B : std_logic_vector(bus_size - 1 downto 0);
 signal MEM_ALU_src_B : std_logic_vector(bus_size - 1 downto 0);
 signal MEM_ReadData : std_logic_vector(bus_size - 1 downto 0);
 signal MEM_writeData_store :std_logic_vector(bus_size - 1 downto 0);
 signal MEM_readData_load :std_logic_vector(bus_size - 1 downto 0);
-signal IF_PC_4 : std_logic_vector(bus_size - 1 downto 0);
-signal ID_PC_4 : std_logic_vector(bus_size - 1 downto 0);
-signal EX_PC_4 : std_logic_vector(bus_size - 1 downto 0);
-signal ALU_JMP : std_logic_vector(bus_size - 1 downto 0);
+signal IF_PC : std_logic_vector(bus_size - 1 downto 0);
+signal ID_PC : std_logic_vector(bus_size - 1 downto 0);
+signal EX_PC : std_logic_vector(bus_size - 1 downto 0);
+signal ALUSrc_result_A : std_logic_vector(bus_size - 1 downto 0);
 
 
 begin
@@ -96,7 +94,7 @@ begin
         
         wait for 6*200 ns;
 
-        wait for 5*200 ns;
+        wait for 20*200 ns;
 
         
 
@@ -113,7 +111,7 @@ begin
 
   Instruction_memory_1 : instruction_mem
     port map (
-      PC => PC_signal,
+      PC => IF_PC,
       Instruction => IF_Instruction);
       
   IF_ID_1 : IF_ID
@@ -122,12 +120,10 @@ begin
       reset => reset,
       IF_Flush => IF_Flush,
       stall => stall,
-      IF_PC_4 => IF_PC_4,
-      PC_signal => PC_signal,
+      IF_PC => IF_PC,
       IF_Instruction => IF_Instruction,
       ID_stall => ID_stall,
-      ID_PC_4 => ID_PC_4,
-      ID_PC_signal => ID_PC_signal,
+      ID_PC => ID_PC,
       ID_Instruction => ID_Instruction);
       
   control_unit_1 : control_unit
@@ -154,10 +150,9 @@ begin
       ID_stall => ID_stall,
       jumps => ID_ctrl(1 downto 0),
       SignImmSh => SignImmSh,
-      ID_PC_signal => ID_PC_signal,
+      ID_PC_signal => ID_PC,
       ID_read_data_1 => ID_read_data_1,
-      PC_out => PC_signal,
-      PC_4_out => IF_PC_4);
+      PC_out => IF_PC);
 
   Hazard_unit_1 : hasard_detection_unit
     port map (
@@ -195,7 +190,7 @@ begin
       ID_Instruction => ID_Instruction,
       ID_read_data_1 => ID_read_data_1,
       ID_read_data_2 => ID_read_data_2,
-      ID_PC_4 => ID_PC_4,
+      ID_PC => ID_PC,
       SignImmSh => SignImmSh,
       EX_SignImmSh => EX_SignImmSh,
       EX_EX => EX_EX,
@@ -205,7 +200,7 @@ begin
       EX_funct7 => EX_funct7,
       EX_read_data_1 => EX_read_data_1,
       EX_read_data_2 => EX_read_data_2,
-      EX_PC_4 => EX_PC_4,
+      EX_PC => EX_PC,
       EX_Register_Rs1 => EX_Register_Rs1,
       EX_Register_Rs2 => EX_Register_Rs2,
       EX_Register_Rd => EX_Register_Rd);
@@ -226,18 +221,22 @@ begin
       MEM_AluResult => MEM_AluResult,
       ALU_src => ALU_src_B);
  
-  ALUSrc_result   <= EX_SignImmSh when (EX_EX(4) = '1') else ALU_src_B;
+  ALUSrc_result_B   <= EX_SignImmSh when (EX_EX(4) = '1') else
+                    (x"00000004") when  (EX_EX(5) = '1') else
+                    ALU_src_B;
   
+  ALUSrc_result_A <= EX_PC when ( (EX_EX(5) = '1') or (EX_EX(3 downto 0) = "0001") ) else
+              ALU_src_A;
+
   ALU_unit_1 : ALU_unit
     port map (
-      src_A => ALU_src_A,
-      src_B => ALUSrc_result,
+      src_A => ALUSrc_result_A,
+      src_B => ALUSrc_result_B,
       funct_3 => EX_funct3,
       funct_7 => EX_funct7,
       decoded_opcode => EX_EX (3 downto 0),
       alu_result => AluResult_sig);
       
-  ALU_JMP <= EX_PC_4 when (EX_EX(5) = '1') else AluResult_sig;
 
   Fowarding_unit_1 : Fowarding_unit
     port map (
@@ -256,7 +255,7 @@ begin
       reset => reset,
       EX_M => EX_M,
       EX_WB => EX_WB,
-      AluResult_sig => ALU_JMP,
+      AluResult_sig => AluResult_sig,
       ALU_src_B => ALU_src_B,
       EX_Register_Rd => EX_Register_Rd,
       MEM_M => MEM_M,

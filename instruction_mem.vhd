@@ -44,8 +44,8 @@ architecture mem of instruction_mem is
 	TYPE romtype is array (0 to mem_size) of std_logic_vector(31 downto 0);
 
 		constant instruction_rom : romtype := (
-				--0  => X"00400597" , 
-				0 => "00001111111100000000010110010011" , --ADDI 11, 0, FF
+				0  => X"00400597" , 
+				--0 => "00001111111100000000010110010011" , --ADDI 11, 0, FF
 				1  => X"00058593" , 
 				2  => X"00c000ef" , 
 				3  => X"00050093" ,  

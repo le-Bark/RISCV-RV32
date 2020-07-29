@@ -38,7 +38,7 @@ entity ID_EX is
            ID_Instruction : in std_logic_vector(31 downto 0);
            ID_read_data_1 : in std_logic_vector(31 downto 0);
            ID_read_data_2 : in std_logic_vector(31 downto 0);
-           ID_PC_4 : in std_logic_vector(31 downto 0);
+           ID_PC : in std_logic_vector(31 downto 0);
            SignImmSh : in std_logic_vector(31 downto 0);
            EX_SignImmSh : out std_logic_vector(31 downto 0);
            EX_EX : out std_logic_vector(5 downto 0);
@@ -48,7 +48,7 @@ entity ID_EX is
            EX_funct7 : out std_logic_vector(6 downto 0);
            EX_read_data_1 : out std_logic_vector(31 downto 0);
            EX_read_data_2 : out std_logic_vector(31 downto 0);
-           EX_PC_4 : out std_logic_vector(31 downto 0);
+           EX_PC : out std_logic_vector(31 downto 0);
            EX_Register_Rs1 : out std_logic_vector(4 downto 0);
            EX_Register_Rs2 : out std_logic_vector(4 downto 0);
            EX_Register_Rd : out std_logic_vector(4 downto 0));
@@ -73,7 +73,7 @@ begin
           EX_Register_Rs2 <=(others => '0');
           EX_Register_Rd <=(others => '0');
           EX_SignImmSh <=(others => '0');
-          EX_PC_4 <=(others => '0');
+          EX_PC <=(others => '0');
         else
           EX_EX <= Result_mux_control(5 downto 0);
           EX_M <= Result_mux_control(13 downto 6);
@@ -86,7 +86,7 @@ begin
           EX_Register_Rs2 <=  ID_Instruction (24 downto 20);
           EX_Register_Rd <=  ID_Instruction (11 downto 7);
           EX_SignImmSh <= SignImmSh;
-          EX_PC_4 <= ID_PC_4;
+          EX_PC <= ID_PC;
         end if;
       end if;
     end process;
