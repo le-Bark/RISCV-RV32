@@ -50,10 +50,12 @@ architecture mem of data_memory is
   constant ADDR_SIZE : integer := integer(ceil(log2(real(MEM_SIZE))));
   type ram_type is array (0 to MEM_SIZE-1) of std_logic_vector(7 downto 0);
   signal data_mem : ram_type;
-  signal int_add  : integer := to_integer(unsigned(address(ADDR_SIZE-1 downto 0)));
+  signal int_add  : integer := 0;
 
 
 begin
+
+  int_add <= to_integer(unsigned(address(ADDR_SIZE-1 downto 0)));
 
   process(clk) is
   begin

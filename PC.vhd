@@ -36,6 +36,7 @@ entity PC is
            reset : in std_logic;
            PCsrc : in std_logic;
            ID_stall : in std_logic;
+           PC_stall : in std_logic;
            jumps : in std_logic_vector(1 downto 0);
            SignImmSh : in std_logic_vector(31 downto 0);
            ID_PC_signal : in std_logic_vector(31 downto 0);
@@ -58,7 +59,9 @@ begin
   PCjumpreg <=  std_logic_vector(unsigned(ID_read_data_1) + unsigned(SignImmSh));
   
   PCnextbr <= PCbranch when ((PCsrc = '1'or jumps(1) ='1') and ID_stall = '0') else
-              PCjumpreg when (jumps(0) = '1' and ID_stall = '0') else IF_PCplus4;   
+              PCjumpreg when (jumps(0) = '1' and ID_stall = '0') else   
+              PC_signal when PC_stall = '1' else
+              IF_PCplus4;   
               
   PC_process : process(clk,reset)
     begin

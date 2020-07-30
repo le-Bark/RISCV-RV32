@@ -38,11 +38,12 @@ package pack is
       reset : in std_logic;
       PCsrc : in std_logic;
       ID_stall : in std_logic;
+      PC_stall : in std_logic;
       jumps : in std_logic_vector(1 downto 0);
       SignImmSh : in std_logic_vector(31 downto 0);
       ID_PC_signal : in std_logic_vector(31 downto 0);
       ID_read_data_1 : in std_logic_vector(31 downto 0);
-      PC_out : out std_logic_vector(31 downto 0));
+      PC_out : out std_logic_vector(31 downto 0));  
   end component PC;
 
   component instruction_mem is
@@ -66,9 +67,11 @@ package pack is
 
   component hasard_detection_unit is
     Port (
-      branch_condition : in  std_logic;
-      opcode           : in  std_logic_vector(6 downto 0);
-      stall            : out std_logic);
+      branch_condition : in std_logic;
+      ID_stall : in std_logic;
+      opcode : in std_logic_vector(6 downto 0);
+      stall : out std_logic;
+      PC_stall : out std_logic);
   end component hasard_detection_unit;
 
   component control_unit is

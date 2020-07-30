@@ -75,6 +75,10 @@ architecture testbench of Datapath_tb is
   signal EX_PC               : std_logic_vector(bus_size - 1 downto 0);
   signal ALUSrc_result_A     : std_logic_vector(bus_size - 1 downto 0);
   signal AUIPC_ctrl_EX       : std_logic;
+  signal PC_stall            : std_logic;
+  signal branch_data_1       : std_logic_vector(bus_size - 1 downto 0);
+  signal branch_data_2       : std_logic_vector(bus_size - 1 downto 0);
+
 
 
 begin
@@ -149,6 +153,7 @@ begin
       reset          => reset,
       PCsrc          => PCsrc,
       ID_stall       => ID_stall,
+      PC_stall       => PC_stall,
       jumps          => ID_ctrl(1 downto 0),
       SignImmSh      => SignImmSh,
       ID_PC_signal   => ID_PC,
@@ -158,8 +163,10 @@ begin
   Hazard_unit_1 : hasard_detection_unit
     port map (
       branch_condition => PCsrc,
+      ID_stall       => ID_stall,
       opcode           => ID_Instruction (6 downto 0),
-      stall            => stall);
+      stall            => stall,
+      PC_stall    => PC_stall);
 
   Registers_1 : Registers
     port map (
@@ -171,6 +178,11 @@ begin
       write_data  => WB_Result,
       read_data_1 => ID_read_data_1,
       read_data_2 => ID_read_data_2);
+
+
+
+
+
 
   branch_verif : branch
     port map (
