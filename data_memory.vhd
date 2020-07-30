@@ -49,9 +49,9 @@ architecture mem of data_memory is
   constant MEM_SIZE  : integer := 4096;
   constant ADDR_SIZE : integer := integer(ceil(log2(real(MEM_SIZE))));
   type ram_type is array (0 to MEM_SIZE-1) of std_logic_vector(7 downto 0);
-  signal data_mem    : ram_type;
-  signal int_add : integer:= to_integer(unsigned(address(ADDR_SIZE-1 downto 0)));  
- 
+  signal data_mem : ram_type;
+  signal int_add  : integer := to_integer(unsigned(address(ADDR_SIZE-1 downto 0)));
+
 
 begin
 
@@ -59,29 +59,23 @@ begin
   begin
     if rising_edge(clk) then
       if reset = '1' then
-        for i in 0 to MEM_SIZE - 1 loop
-          if i = 0 then
-            data_mem(i) <= x"0A";
-            else
-            data_mem(i) <= (others => '0');
-            end if;
-        end loop;
+        data_mem    <= others => (others => '0');
+        data_mem(0) <= x"0A";
       elsif mem_write = '1' then
         case store_ctrl is
-
           when "000" => data_mem(int_add) <= write_data(7 downto 0); -- Store Byte
           when "001" => data_mem(int_add) <= write_data(7 downto 0); --Store 16bits
-                        data_mem(int_add +1) <= write_data(15 downto 8);
-          when others =>  data_mem(int_add) <= write_data(7 downto 0); --Store 32bits
-                          data_mem(int_add +1) <= write_data(15 downto 8);
-                          data_mem(int_add +2) <= write_data(23 downto 16);
-                          data_mem(int_add +3) <= write_data(31 downto 24);
+            data_mem(int_add +1) <= write_data(15 downto 8);
+          when others => data_mem(int_add) <= write_data(7 downto 0); --Store 32bits
+            data_mem(int_add +1) <= write_data(15 downto 8);
+            data_mem(int_add +2) <= write_data(23 downto 16);
+            data_mem(int_add +3) <= write_data(31 downto 24);
         end case;
       end if;
     end if;
   end process;
 
-  read_data <= data_mem(int_add + 3) & data_mem(int_add + 2) & data_mem(int_add +1) & data_mem(int_add); 
-  
+  read_data <= data_mem(int_add + 3) & data_mem(int_add + 2) & data_mem(int_add +1) & data_mem(int_add);
+
 
 end mem;
