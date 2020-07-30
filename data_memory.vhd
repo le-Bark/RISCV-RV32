@@ -61,8 +61,13 @@ begin
   begin
     if rising_edge(clk) then
       if reset = '1' then
-        data_mem    <= others => (others => '0');
-        data_mem(0) <= x"0A";
+        for i in 0 to MEM_SIZE - 1 loop
+          if i = 0 then
+            data_mem(i) <= x"0A";
+            else
+            data_mem(i) <= (others => '0');
+            end if;
+        end loop;
       elsif mem_write = '1' then
         case store_ctrl is
           when "000" => data_mem(int_add) <= write_data(7 downto 0); -- Store Byte

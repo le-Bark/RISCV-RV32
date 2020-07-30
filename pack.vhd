@@ -138,12 +138,12 @@ package pack is
   end component ID_EX;
 
   component ALU_src is
-    Port (
-      FOWARD_OP     : in  std_logic_vector(1 downto 0);
-      EX_read_data  : in  std_logic_vector(31 downto 0);
-      WB_Result     : in  std_logic_vector(31 downto 0);
-      MEM_AluResult : in  std_logic_vector(31 downto 0);
-      ALU_src       : out std_logic_vector(31 downto 0));
+    Port ( 
+      FOWARD_OP : in std_logic_vector(1 downto 0);
+      REG_read : in std_logic_vector(31 downto 0);
+      EX_Result : in std_logic_vector(31 downto 0);
+      MEM_Result : in std_logic_vector(31 downto 0);
+      ID_src : out std_logic_vector(31 downto 0));
   end component ALU_src;
 
   component ALU_unit is
@@ -158,12 +158,12 @@ package pack is
 
   component Fowarding_unit is
     Port (
-      rs1         : in  std_logic_vector(4 downto 0);
-      rs2         : in  std_logic_vector(4 downto 0);
-      rd_mem      : in  std_logic_vector(4 downto 0);
-      mem_enable  : in  std_logic;
-      rd_wb       : in  std_logic_vector(4 downto 0);
-      wb_enable   : in  std_logic;
+      rs1 : in std_logic_vector(4 downto 0);
+      rs2 : in std_logic_vector(4 downto 0);
+      rd_ex : in std_logic_vector(4 downto 0);
+      ex_enable : in std_logic;
+      rd_mem : in std_logic_vector(4 downto 0);
+      mem_enable : in std_logic;
       foward_op_a : out std_logic_vector(1 downto 0);
       foward_op_b : out std_logic_vector(1 downto 0));
   end component Fowarding_unit;
@@ -198,17 +198,15 @@ package pack is
   end component Data_memory;
 
   component MEM_WB is
-    Port (
-      clk             : in  std_logic;
-      reset           : in  std_logic;
-      MEM_WB          : in  std_logic_vector(1 downto 0);
-      MEM_ReadData    : in  std_logic_vector(31 downto 0);
-      MEM_AluResult   : in  std_logic_vector(31 downto 0);
-      MEM_Register_Rd : in  std_logic_vector(4 downto 0);
-      WB_WB           : out std_logic_vector(1 downto 0);
-      WB_ReadData     : out std_logic_vector(31 downto 0);
-      WB_AluResult    : out std_logic_vector(31 downto 0);
-      WB_Register_Rd  : out std_logic_vector(4 downto 0));
+    Port ( 
+      clk : in std_logic;
+      reset : in std_logic;
+      MEM_Result : in std_logic_vector(31 downto 0);
+      MEM_WB : in std_logic_vector(1 downto 0);
+      MEM_Register_Rd : in std_logic_vector(4 downto 0);
+      WB_WB : out std_logic_vector(1 downto 0);
+      WB_result : out std_logic_vector(31 downto 0);
+      WB_Register_Rd : out std_logic_vector(4 downto 0));
   end component MEM_WB;
 
 
