@@ -49,7 +49,7 @@ architecture hasard_detection_unit_arch of hasard_detection_unit is
     constant load_opcode : std_logic_vector(6 downto 0) := "0000011";
 
 begin
-    process (opcode,branch_condition)
+    process (opcode,branch_condition,ID_stall)
     begin
         if ID_stall = '1' then
             stall <= '0';
