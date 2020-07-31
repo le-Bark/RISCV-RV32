@@ -88,23 +88,24 @@ begin
     wait for 100 ns;
   end process clk_gen;
 
+  waiting : process(IF_PC)
+  begin
+
+    if IF_PC = x"000000F0" then
+      check_equal(WB_Result,16#44f9ae05#,"mul result");
+      check_equal(WB_Register_Rd,16#A#,"mul result write reg");
+    end if;
+
+  end process waiting;
+
+
   main : process
   begin
     test_runner_setup(runner, runner_cfg);
     reset <= '1','0' after 200 ns;
     wait for 100 ns;
 
-    wait for 6*200 ns;
-
-    wait for 24*200 ns;
-
-
-
-    --check_equal(clk,'1',"test pc 0 on reset");
-
-
-
-
+    wait until (unsigned(IF_PC) > (16#e4# + 20));
 
 
     test_runner_cleanup(runner);

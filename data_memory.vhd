@@ -61,12 +61,24 @@ begin
   begin
     if rising_edge(clk) then
       if reset = '1' then
-        for i in 0 to MEM_SIZE - 1 loop
-          if i = 0 then
-            data_mem(i) <= x"0A";
-            else
+        data_mem(0) <= x"db";
+        data_mem(1) <= x"0f";
+        data_mem(2) <= x"49";
+        data_mem(3) <= x"40";
+        data_mem(4) <= x"14";
+        data_mem(5) <= x"2e";
+        data_mem(6) <= x"9f";
+        data_mem(7) <= x"44";
+        data_mem(8) <= x"00";
+        data_mem(9) <= x"00";
+        data_mem(10) <= x"80";
+        data_mem(11) <= x"7F";
+        data_mem(12) <= x"FF";
+        data_mem(13) <= x"FF";
+        data_mem(14) <= x"7F";
+        data_mem(15) <= x"00";
+        for i in 16 to MEM_SIZE - 1 loop
             data_mem(i) <= (others => '0');
-            end if;
         end loop;
       elsif mem_write = '1' then
         case store_ctrl is
