@@ -3,7 +3,6 @@ use ieee.std_logic_1164.all;
 
 library vunit_lib;
 context vunit_lib.vunit_context;
-
 library demo_lib;
 
 entity fowarding_unit_tb is
@@ -12,12 +11,12 @@ end entity fowarding_unit_tb;
 
 architecture testbench of fowarding_unit_tb is
 
-    signal rs : std_logic_vector(4 downto 0);
-    signal rt : std_logic_vector(4 downto 0);
-    signal rd_mem : std_logic_vector(4 downto 0);
+    signal rs1 : std_logic_vector(4 downto 0);
+    signal rs2 : std_logic_vector(4 downto 0);
+    signal rd_ex : std_logic_vector(4 downto 0);
+    signal ex_enable : std_logic;
     signal mem_enable : std_logic;
-    signal wb_enable : std_logic;
-    signal rd_wb : std_logic_vector(4 downto 0);
+    signal rd_mem : std_logic_vector(4 downto 0);
     signal foward_op_a : std_logic_vector(1 downto 0);
     signal foward_op_b : std_logic_vector(1 downto 0);
     signal expected_a : std_logic_vector(1 downto 0);
@@ -29,12 +28,12 @@ begin
     begin
         test_runner_setup(runner, runner_cfg);
 
-        rs <= "00001";
-        rt <= "00010";
-        rd_mem <= "00100";
-        rd_wb <= "00110";
+        rs1 <= "00001";
+        rs2 <= "00010";
+        rd_ex <= "00100";
+        rd_mem <= "00110";
+        ex_enable <= '1';
         mem_enable <= '1';
-        wb_enable <= '1';
 
         expected_a <= "00";
         expected_b <= "00";
@@ -44,7 +43,7 @@ begin
         check_equal(foward_op_a,expected_a,"test op a 1");
         check_equal(foward_op_b,expected_b,"test op b 1");
 
-        rs <= rd_mem;
+        rs1 <= rd_ex;
 
         expected_a <= "01";
         expected_b <= "00";
@@ -53,8 +52,8 @@ begin
         check_equal(foward_op_a,expected_a,"test op a 1");
         check_equal(foward_op_b,expected_b,"test op b 1");
 
-        rs <= rd_wb;
-        rt <= rd_mem;
+        rs1 <= rd_mem;
+        rs2 <= rd_ex;
 
         expected_a <= "10";
         expected_b <= "01";
@@ -64,8 +63,8 @@ begin
         check_equal(foward_op_a,expected_a,"test op a 1");
         check_equal(foward_op_b,expected_b,"test op b 1");
 
-        rs <= "00001";
-        rt <= rd_wb;
+        rs1 <= "00001";
+        rs2 <= rd_mem;
 
         expected_a <= "00";
         expected_b <= "10";
@@ -75,10 +74,10 @@ begin
         check_equal(foward_op_a,expected_a,"test op a 1");
         check_equal(foward_op_b,expected_b,"test op b 1");
 
-        rs <= "00100";
-        rt <= "00100";
+        rs1 <= "00100";
+        rs2 <= "00100";
+        rd_ex <= "00100";
         rd_mem <= "00100";
-        rd_wb <= "00100";
 
         expected_a <= "01";
         expected_b <= "01";
@@ -88,12 +87,12 @@ begin
         check_equal(foward_op_a,expected_a,"test op a 1");
         check_equal(foward_op_b,expected_b,"test op b 1");
 
-        rs <= "00110";
-        rt <= "00100";
-        rd_mem <= "00110";
-        rd_wb <= "00100";
+        rs1 <= "00110";
+        rs2 <= "00100";
+        rd_ex <= "00110";
+        rd_mem <= "00100";
+        ex_enable <= '0';
         mem_enable <= '0';
-        wb_enable <= '0';
 
         expected_a <= "00";
         expected_b <= "00";
@@ -109,12 +108,12 @@ begin
     
     DUT : entity work.fowarding_unit
     port map (
-        rs1 => rs,
-        rs2 => rt,
+        rs1 => rs1,
+        rs2 => rs2,
+        rd_ex => rd_ex,
         rd_mem => rd_mem,
-        rd_wb => rd_wb,
+        ex_enable => ex_enable,
         mem_enable => mem_enable,
-        wb_enable => wb_enable,
         foward_op_a => foward_op_a,
         foward_op_b => foward_op_b
     );
