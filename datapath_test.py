@@ -28,11 +28,12 @@ demo_lib.add_source_files(join(src_path, "ALU_unit.vhd"))
 demo_lib.add_source_files(join(src_path, "control_unit.vhd"))
 #demo_lib.add_source_files(join(src_path, "Datapath.vhd"))
 demo_lib.add_source_files(join(src_path, "EX_MEM.vhd"))
-#demo_lib.add_source_files(join(src_path, "fowarding_unit_tb.vhd"))
+demo_lib.add_source_files(join(src_path, "fowarding_unit_tb.vhd"))
 demo_lib.add_source_files(join(src_path, "ID_EX.vhd"))
 demo_lib.add_source_files(join(src_path, "imm_gen.vhd"))
 demo_lib.add_source_files(join(src_path, "MEM_WB.vhd"))
 demo_lib.add_source_files(join(src_path, "PC.vhd"))
+demo_lib.add_source_files(join(src_path, "hasard_detection_unit_tb.vhd"))
 
 
 ui.set_compile_option("ghdl.flags", ["-frelaxed-rules","--no-vital-checks"])
