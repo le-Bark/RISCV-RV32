@@ -5,7 +5,7 @@
 -- File        : data_memory.vhd
 -- Author      : Angelo
 -- Company     : Angelo Bautista-Gomez
--- Last update : Fri Jul 31 00:16:38 2020
+-- Last update : Fri Jul 31 16:32:08 2020
 --------------------------------------------------------------------------------
 -- Copyright (c) 2020 Angelo Bautista-Gomez
 --------------------------------------------------------------------------------

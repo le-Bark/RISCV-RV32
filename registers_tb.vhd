@@ -4,7 +4,7 @@
 --------------------------------------------------------------------------------
 -- File        : registers_tb.vhd
 -- Author      : Angelo
--- Last update : Fri Jul 31 00:34:48 2020
+-- Last update : Fri Jul 31 17:07:05 2020
 --------------------------------------------------------------------------------
 -- Copyright (c) 2020 Angelo Bautista-Gomez
 -------------------------------------------------------------------------------
@@ -70,25 +70,31 @@ begin
 	main : process
 	begin
 		test_runner_setup(runner, runner_cfg);
-		reg_write  <= '1';
+
 		read_reg_1 <= (others => '0');
 		read_reg_2 <= (others => '0');
+		reg_write  <= '1';
+		write_data <= (others => '1');
 		write_reg  <= ("00001");
-		write_data <= (others => '1');
 
-		wait for C_CLK_PERIOD;
+		expected_read_data_1 <= (others => '0');
+		expected_read_data_2 <= (others => '0');
 
-		reg_write  <= '1';
-		read_reg_1 <= (others => '0');
-		read_reg_2 <= (others => '0');
+		wait for 400 ns;
+		
+		check_equal(read_data_1,expected_read_data_1);
+		check_equal(read_data_2,expected_read_data_2);
 		write_reg  <= ("00010");
-		write_data <= (others => '1');
 
-		wait for C_CLK_PERIOD;
+		wait for 400 ns;
 
-		reg_write            <= '0';
+		reg_write <= '0';
+		read_reg_1 <= "00001";
+		read_reg_2 <= "00010";
+
 		expected_read_data_1 <= (others => '1');
 		expected_read_data_2 <= (others => '1');
+
 		wait for 40 ns;
 
 		check_equal(read_data_1,expected_read_data_1);

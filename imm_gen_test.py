@@ -1,5 +1,5 @@
 ##############################################################################
-# RISC-V control unit test
+# RISC-V imm_gen
 # Author : Angelo Bautista-Gomez
 # Date : 2020-07-30
 # Adapted from https://github.com/VUnit/vunit/blob/master/examples/vhdl/uart/run.py
@@ -12,8 +12,8 @@ ui = VUnit.from_argv()
 src_path = join(dirname(__file__), ".")
 demo_lib = ui.add_library("demo_lib")
 
-demo_lib.add_source_files(join(src_path, "control_unit.vhd"))
-demo_lib.add_source_files(join(src_path, "control_unit_tb.vhd"))
+demo_lib.add_source_files(join(src_path, "imm_gen.vhd"))
+demo_lib.add_source_files(join(src_path, "imm_gen_tb.vhd"))
 
 
 ui.set_compile_option("ghdl.flags", ["-frelaxed-rules","--no-vital-checks"])

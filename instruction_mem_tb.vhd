@@ -4,7 +4,7 @@
 --------------------------------------------------------------------------------
 -- File        : instruction_mem_tb.vhd
 -- Author      : Angelo
--- Last update : Thu Jul 30 23:24:57 2020
+-- Last update : Fri Jul 31 15:50:14 2020
 --------------------------------------------------------------------------------
 -- Copyright (c) 2020 Angelo Bautista-Gomez
 -------------------------------------------------------------------------------
@@ -44,38 +44,38 @@ begin
 	begin
 		test_runner_setup(runner, runner_cfg);
 
-		pc                    <= 0;
+		pc                    <= X"00000000";
+		exepected_instruction <= X"00400517";
+		wait for 40 ns;
+		check_equal(instruction,exepected_instruction);
+
+		pc                    <= X"00000004";
+		exepected_instruction <= X"00052503";
+		wait for 40 ns;
+		check_equal(instruction,exepected_instruction);
+
+		pc                    <= X"00000008";
 		exepected_instruction <= X"00400597";
 		wait for 40 ns;
 		check_equal(instruction,exepected_instruction);
 
-		pc                    <= pc+1;
-		exepected_instruction <= X"00058593";
+		pc                    <= X"0000000C";
+		exepected_instruction <= X"ffc5a583";
 		wait for 40 ns;
 		check_equal(instruction,exepected_instruction);
 
-		pc                    <= pc+1;
-		exepected_instruction <= X"00c000ef";
+		pc                    <= X"00000010";
+		exepected_instruction <= X"004000ef";
 		wait for 40 ns;
 		check_equal(instruction,exepected_instruction);
 
-		pc                    <= pc+1;
-		exepected_instruction <= X"00050093";
+		pc                    <= X"00000014";
+		exepected_instruction <= X"00050663";
 		wait for 40 ns;
 		check_equal(instruction,exepected_instruction);
 
-		pc                    <= pc+1;
-		exepected_instruction <= X"0200006f";
-		wait for 40 ns;
-		check_equal(instruction,exepected_instruction);
-
-		pc                    <= pc+1;
-		exepected_instruction <= X"00000513";
-		wait for 40 ns;
-		check_equal(instruction,exepected_instruction);
-
-		pc                    <= pc+1;
-		exepected_instruction <= X"00058283";
+		pc                    <= X"00000018";
+		exepected_instruction <= X"00058463";
 		wait for 40 ns;
 		check_equal(instruction,exepected_instruction);
 

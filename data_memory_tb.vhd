@@ -4,7 +4,7 @@
 --------------------------------------------------------------------------------
 -- File        : data_memory_tb.vhd
 -- Author      : Angelo
--- Last update : Fri Jul 31 00:34:50 2020
+-- Last update : Fri Jul 31 16:32:08 2020
 --------------------------------------------------------------------------------
 -- Copyright (c) 2020 Angelo Bautista-Gomez
 -------------------------------------------------------------------------------
@@ -75,19 +75,19 @@ begin
 	main : process
 	begin
 		test_runner_setup(runner, runner_cfg);
-		address    <= (others => '0');
-		mem_write  <= '1';
-		mem_read   <= '0';
-		write_data <= X"0000000F";
-		mem_write  <= '0';
-		store_ctrl <= "000"
-
-			wait for C_CLK_PERIOD;
+		wait for 4000 ns;
+		address            <= (others => '0');
 		mem_write          <= '0';
-		expected_read_data <= "0000000F";
+		mem_read           <= '0';
+		expected_read_data <= X"40490fdb";
+		wait for 200 ns;
+		mem_write          <= '1';
+		address            <= (others => '0');
+		write_data         <= X"000000FF";
+		expected_read_data <= X"000000FF";
 
 		wait for 40 ns;
-
+		mem_write <= '0';
 		check_equal(read_data,expected_read_data);
 		test_runner_cleanup(runner);
 	end process main;
