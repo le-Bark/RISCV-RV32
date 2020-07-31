@@ -63,6 +63,7 @@ begin
             PC_stall <= '0';
         elsif opcode = jalr_opcode then
             stall <= '1';
+            PC_stall <= '0';
         elsif opcode = load_opcode then
             stall <= '1';
             PC_stall <= '1';
