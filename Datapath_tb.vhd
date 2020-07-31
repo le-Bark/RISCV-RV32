@@ -54,10 +54,8 @@ architecture testbench of Datapath_tb is
   signal EX_SignImmSh        : std_logic_vector(bus_size - 1 downto 0);
   signal WB_Result           : std_logic_vector(bus_size - 1 downto 0);
   signal MEM_AluResult       : std_logic_vector(bus_size - 1 downto 0);
-  signal WB_AluResult        : std_logic_vector(bus_size - 1 downto 0);
   signal ID_Instruction      : std_logic_vector(bus_size - 1 downto 0);
   signal IF_Instruction      : std_logic_vector(bus_size - 1 downto 0);
-  signal WB_ReadData         : std_logic_vector(bus_size - 1 downto 0);
   signal AluResult_sig       : std_logic_vector(bus_size - 1 downto 0);
   signal ID_read_data_1      : std_logic_vector(bus_size - 1 downto 0);
   signal ID_read_data_2      : std_logic_vector(bus_size - 1 downto 0);
@@ -75,7 +73,10 @@ architecture testbench of Datapath_tb is
   signal EX_PC               : std_logic_vector(bus_size - 1 downto 0);
   signal ALUSrc_result_A     : std_logic_vector(bus_size - 1 downto 0);
   signal AUIPC_ctrl_EX       : std_logic;
-
+  signal PC_stall            : std_logic;
+  signal ID_src_A            : std_logic_vector(bus_size - 1 downto 0);
+  signal ID_src_B            : std_logic_vector(bus_size - 1 downto 0);
+  signal MEM_Result          : std_logic_vector(bus_size - 1 downto 0);
 
 begin
 
@@ -87,23 +88,24 @@ begin
     wait for 100 ns;
   end process clk_gen;
 
+  waiting : process(IF_PC)
+  begin
+
+    if IF_PC = x"000000F0" then
+      check_equal(WB_Result,16#44f9ae05#,"mul result");
+      check_equal(WB_Register_Rd,16#A#,"mul result write reg");
+    end if;
+
+  end process waiting;
+
+
   main : process
   begin
     test_runner_setup(runner, runner_cfg);
     reset <= '1','0' after 200 ns;
     wait for 100 ns;
 
-    wait for 6*200 ns;
-
-    wait for 20*200 ns;
-
-
-
-    --check_equal(clk,'1',"test pc 0 on reset");
-
-
-
-
+    wait until (unsigned(IF_PC) > (16#e4# + 20));
 
 
     test_runner_cleanup(runner);
@@ -149,6 +151,7 @@ begin
       reset          => reset,
       PCsrc          => PCsrc,
       ID_stall       => ID_stall,
+      PC_stall       => PC_stall,
       jumps          => ID_ctrl(1 downto 0),
       SignImmSh      => SignImmSh,
       ID_PC_signal   => ID_PC,
@@ -158,8 +161,10 @@ begin
   Hazard_unit_1 : hasard_detection_unit
     port map (
       branch_condition => PCsrc,
+      ID_stall       => ID_stall,
       opcode           => ID_Instruction (6 downto 0),
-      stall            => stall);
+      stall            => stall,
+      PC_stall    => PC_stall);
 
   Registers_1 : Registers
     port map (
@@ -171,11 +176,13 @@ begin
       write_data  => WB_Result,
       read_data_1 => ID_read_data_1,
       read_data_2 => ID_read_data_2);
+        
+
 
   branch_verif : branch
     port map (
-      read_data_1      => ID_read_data_1,
-      read_data_2      => ID_read_data_2,
+      read_data_1      => ID_src_A,
+      read_data_2      => ID_src_B,
       control_branch   => ID_Instruction (14 downto 12),
       branch_instruc   => ID_ctrl(2),
       branch_condition => PCsrc);
@@ -189,8 +196,8 @@ begin
       reset              => reset,
       Result_mux_control => Result_mux_control,
       ID_Instruction     => ID_Instruction,
-      ID_read_data_1     => ID_read_data_1,
-      ID_read_data_2     => ID_read_data_2,
+      ID_read_data_1     => ID_src_A,
+      ID_read_data_2     => ID_src_B,
       ID_PC              => ID_PC,
       SignImmSh          => SignImmSh,
       EX_SignImmSh       => EX_SignImmSh,
@@ -209,28 +216,28 @@ begin
   ALU_src_A_1 : ALU_src
     port map (
       FOWARD_OP     => FOWARD_OP_A,
-      EX_read_data  => EX_read_data_1,
-      WB_Result     => WB_Result,
-      MEM_AluResult => MEM_AluResult,
-      ALU_src       => ALU_src_A);
+      REG_read  => ID_read_data_1,
+      EX_Result     => AluResult_sig,
+      MEM_Result => MEM_result,
+      ID_src       => ID_src_A);
 
   ALU_src_B_1 : ALU_src
     port map (
       FOWARD_OP     => FOWARD_OP_B,
-      EX_read_data  => EX_read_data_2,
-      WB_Result     => WB_Result,
-      MEM_AluResult => MEM_AluResult,
-      ALU_src       => ALU_src_B);
+      REG_read  => ID_read_data_2,
+      EX_Result     => AluResult_sig,
+      MEM_Result => MEM_result,
+      ID_src       => ID_src_B);
 
   AUIPC_ctrl_EX <= '1' when EX_EX(3 downto 0) = "0001" else
     '0';
 
+  ALUSrc_result_A <= EX_PC when ( (EX_EX(5) = '1') or (AUIPC_ctrl_EX = '1') ) else
+  EX_read_data_1;
+
   ALUSrc_result_B <= EX_SignImmSh when (EX_EX(4) = '1') else
     (x"00000004") when (EX_EX(5) = '1') else
-    ALU_src_B;
-
-  ALUSrc_result_A <= EX_PC when ( (EX_EX(5) = '1') or (AUIPC_ctrl_EX = '1') ) else
-    ALU_src_A;
+    EX_read_data_2;
 
   ALU_unit_1 : ALU_unit
     port map (
@@ -241,15 +248,14 @@ begin
       decoded_opcode => EX_EX (3 downto 0),
       alu_result     => AluResult_sig);
 
-
   Fowarding_unit_1 : Fowarding_unit
     port map (
-      rs1         => EX_Register_Rs1,
-      rs2         => EX_Register_Rs2,
-      rd_mem      => MEM_Register_Rd,
-      mem_enable  => MEM_WB_sig(1),
-      rd_wb       => WB_Register_Rd,
-      wb_enable   => WB_WB(1),
+      rs1         => ID_Instruction (19 downto 15),
+      rs2         => ID_Instruction (24 downto 20),
+      rd_ex      => EX_Register_Rd,
+      ex_enable  => EX_WB(1),
+      rd_mem       => MEM_Register_Rd,
+      mem_enable   => MEM_WB_sig(1),
       foward_op_a => FOWARD_OP_A,
       foward_op_b => FOWARD_OP_B);
 
@@ -290,20 +296,20 @@ begin
     MEM_ReadData;
 
 
+  MEM_Result <= MEM_readData_load when (MEM_WB_sig(0) = '1') else MEM_AluResult;
+
   MEM_WB_1 : MEM_WB
     port map (
       clk             => clk,
       reset           => reset,
+      MEM_Result       => MEM_Result,
       MEM_WB          => MEM_WB_sig,
-      MEM_ReadData    => MEM_readData_load,
-      MEM_AluResult   => MEM_AluResult,
       MEM_Register_Rd => MEM_Register_Rd,
       WB_WB           => WB_WB,
-      WB_ReadData     => WB_ReadData,
-      WB_AluResult    => WB_AluResult,
+      WB_result       => WB_result,
       WB_Register_Rd  => WB_Register_Rd);
 
-  WB_Result <= WB_ReadData when (WB_WB(0) = '1') else WB_AluResult;
+
 
 
 end testbench;
