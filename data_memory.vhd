@@ -1,35 +1,24 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 07/23/2020 01:47:20 PM
--- Design Name: 
--- Module Name: data_memory - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
+--------------------------------------------------------------------------------
+-- Title       : <Data_memory>
+-- Project     : RISCV Hardware Conception
+--------------------------------------------------------------------------------
+-- File        : data_memory.vhd
+-- Author      : Angelo
+-- Company     : Angelo Bautista-Gomez
+-- Last update : Fri Jul 31 00:16:38 2020
+--------------------------------------------------------------------------------
+-- Copyright (c) 2020 Angelo Bautista-Gomez
+--------------------------------------------------------------------------------
+-- Description: RAM the contains the data
+--------------------------------------------------------------------------------
+-- Revisions:  
+--------------------------------------------------------------------------------
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
 use IEEE.NUMERIC_STD.ALL;
 use ieee.math_real.all;
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+
 
 entity data_memory is
   Port (
