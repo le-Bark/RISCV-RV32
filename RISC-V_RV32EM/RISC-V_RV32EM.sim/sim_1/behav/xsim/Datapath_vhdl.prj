@@ -1,0 +1,24 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../../ALU.vhd" \
+"../../../../../ALU_control.vhd" \
+"../../../../../ALU_src.vhd" \
+"../../../../../ALU_unit.vhd" \
+"../../../../../pack.vhd" \
+"../../../../../EX_MEM.vhd" \
+"../../../../../ID_EX.vhd" \
+"../../../../../IF_ID.vhd" \
+"../../../../../MEM_WB.vhd" \
+"../../../../../PC.vhd" \
+"../../../../../branch.vhd" \
+"../../../../../control_unit.vhd" \
+"../../../../../data_memory.vhd" \
+"../../../../../fowarding_unit.vhd" \
+"../../../../../hasard_detection_unit.vhd" \
+"../../../../../imm_gen.vhd" \
+"../../../../../instruction_mem.vhd" \
+"../../../../../registers.vhd" \
+"../../../../../Datapath.vhd" \
+
+# Do not sort compile order
+nosort

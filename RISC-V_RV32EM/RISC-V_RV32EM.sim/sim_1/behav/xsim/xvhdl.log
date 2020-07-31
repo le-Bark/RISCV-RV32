@@ -1,0 +1,44 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'ALU'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU_control.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'ALU_control'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU_src.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'ALU_src'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU_unit.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'ALU_unit'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/pack.vhd" into library xil_defaultlib
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/EX_MEM.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'EX_MEM'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ID_EX.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'ID_EX'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/IF_ID.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'IF_ID'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/MEM_WB.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'MEM_WB'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/PC.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'PC'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/branch.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'branch'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/control_unit.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'control_unit'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/data_memory.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'data_memory'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/fowarding_unit.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'fowarding_unit'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/hasard_detection_unit.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'hasard_detection_unit'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/imm_gen.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'imm_gen'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/instruction_mem.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'instruction_mem'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/registers.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'registers'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'Datapath'
+ERROR: [VRFC 10-3353] formal port 'if_pc_4' has no actual or default value [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:102]
+ERROR: [VRFC 10-3353] formal port 'reset' has no actual or default value [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:170]
+ERROR: [VRFC 10-3353] formal port 'reset' has no actual or default value [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:228]
+ERROR: [VRFC 10-3353] formal port 'reset' has no actual or default value [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:248]
+ERROR: [VRFC 10-3353] formal port 'reset' has no actual or default value [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:263]
+ERROR: [VRFC 10-3782] unit 'datapath_arch' ignored due to previous errors [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:42]
+INFO: [VRFC 10-3070] VHDL file 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd' ignored due to errors

@@ -49,6 +49,10 @@ begin
 
 process(inst,instruction)
 begin
+ pre_imm <= (others => '0');
+ B_pre_imm <= (others => '0');
+ J_pre_imm <= (others => '0');
+ U_pre_imm <= (others => '0');
  case inst is
     when "000" => pre_imm <= (others => '0');
     when "001" => pre_imm <= instruction(31 downto 20);
@@ -56,7 +60,11 @@ begin
     when "011" => B_pre_imm <= (instruction(31) & instruction(7) & instruction(30 downto 25) & instruction(11 downto 8) & '0');
     when "100" => U_pre_imm <= instruction(31 downto 12);
     when "101" => J_pre_imm <= (instruction(31)& instruction(19 downto 12) & instruction(20) & instruction(30 downto 21) & '0');
-    when others => pre_imm <= (others => '0'); J_pre_imm <= (others => '0');U_pre_imm <= (others => '0');
+    when others => 
+        pre_imm <= (others => '0');
+        B_pre_imm <= (others => '0');
+        J_pre_imm <= (others => '0');
+        U_pre_imm <= (others => '0');
     end case;
 end process;
 

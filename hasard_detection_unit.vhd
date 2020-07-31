@@ -51,6 +51,7 @@ architecture hasard_detection_unit_arch of hasard_detection_unit is
 begin
     process (opcode,branch_condition,ID_stall)
     begin
+        PC_stall <= '0';
         if ID_stall = '1' then
             stall <= '0';
             PC_stall <= '0';

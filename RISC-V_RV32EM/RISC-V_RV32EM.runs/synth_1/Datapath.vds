@@ -1,0 +1,593 @@
+#-----------------------------------------------------------
+# Vivado v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+# Start of session at: Fri Jul 31 11:25:12 2020
+# Process ID: 6264
+# Current directory: C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/RISC-V_RV32EM/RISC-V_RV32EM.runs/synth_1
+# Command line: vivado.exe -log Datapath.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Datapath.tcl
+# Log file: C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/RISC-V_RV32EM/RISC-V_RV32EM.runs/synth_1/Datapath.vds
+# Journal file: C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/RISC-V_RV32EM/RISC-V_RV32EM.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source Datapath.tcl -notrace
+Command: synth_design -top Datapath -part xc7a35tcpg236-3
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 11884 
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 339.777 ; gain = 93.207
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'Datapath' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:42]
+	Parameter bus_size bound to: 32 - type: integer 
+INFO: [Synth 8-3491] module 'instruction_mem' declared at 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/instruction_mem.vhd:20' bound to instance 'Instruction_memory_1' of component 'instruction_mem' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:102]
+INFO: [Synth 8-638] synthesizing module 'instruction_mem' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/instruction_mem.vhd:28]
+INFO: [Synth 8-256] done synthesizing module 'instruction_mem' (1#1) [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/instruction_mem.vhd:28]
+INFO: [Synth 8-3491] module 'IF_ID' declared at 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/IF_ID.vhd:34' bound to instance 'IF_ID_1' of component 'IF_ID' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:107]
+INFO: [Synth 8-638] synthesizing module 'IF_ID' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/IF_ID.vhd:46]
+INFO: [Synth 8-256] done synthesizing module 'IF_ID' (2#1) [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/IF_ID.vhd:46]
+INFO: [Synth 8-3491] module 'control_unit' declared at 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/control_unit.vhd:20' bound to instance 'control_unit_1' of component 'control_unit' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:119]
+INFO: [Synth 8-638] synthesizing module 'control_unit' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/control_unit.vhd:32]
+INFO: [Synth 8-256] done synthesizing module 'control_unit' (3#1) [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/control_unit.vhd:32]
+INFO: [Synth 8-3491] module 'imm_gen' declared at 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/imm_gen.vhd:34' bound to instance 'imm_gen_1' of component 'imm_gen' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:129]
+INFO: [Synth 8-638] synthesizing module 'imm_gen' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/imm_gen.vhd:42]
+INFO: [Synth 8-256] done synthesizing module 'imm_gen' (4#1) [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/imm_gen.vhd:42]
+INFO: [Synth 8-3491] module 'PC' declared at 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/PC.vhd:34' bound to instance 'PC_1' of component 'PC' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:135]
+INFO: [Synth 8-638] synthesizing module 'PC' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/PC.vhd:47]
+INFO: [Synth 8-4471] merging register 'PC_signal_reg[31:0]' into 'PC_out_reg[31:0]' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/PC.vhd:71]
+WARNING: [Synth 8-6014] Unused sequential element PC_signal_reg was removed.  [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/PC.vhd:71]
+INFO: [Synth 8-256] done synthesizing module 'PC' (5#1) [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/PC.vhd:47]
+INFO: [Synth 8-3491] module 'hasard_detection_unit' declared at 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/hasard_detection_unit.vhd:34' bound to instance 'Hazard_unit_1' of component 'hasard_detection_unit' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:148]
+INFO: [Synth 8-638] synthesizing module 'hasard_detection_unit' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/hasard_detection_unit.vhd:44]
+INFO: [Synth 8-256] done synthesizing module 'hasard_detection_unit' (6#1) [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/hasard_detection_unit.vhd:44]
+INFO: [Synth 8-3491] module 'registers' declared at 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/registers.vhd:21' bound to instance 'Registers_1' of component 'Registers' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:156]
+INFO: [Synth 8-638] synthesizing module 'registers' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/registers.vhd:34]
+INFO: [Synth 8-256] done synthesizing module 'registers' (7#1) [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/registers.vhd:34]
+INFO: [Synth 8-3491] module 'branch' declared at 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/branch.vhd:34' bound to instance 'branch_verif' of component 'branch' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:169]
+INFO: [Synth 8-638] synthesizing module 'branch' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/branch.vhd:42]
+INFO: [Synth 8-256] done synthesizing module 'branch' (8#1) [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/branch.vhd:42]
+INFO: [Synth 8-3491] module 'ID_EX' declared at 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ID_EX.vhd:34' bound to instance 'ID_EX_1' of component 'ID_EX' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:180]
+INFO: [Synth 8-638] synthesizing module 'ID_EX' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ID_EX.vhd:57]
+INFO: [Synth 8-256] done synthesizing module 'ID_EX' (9#1) [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ID_EX.vhd:57]
+INFO: [Synth 8-3491] module 'ALU_src' declared at 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU_src.vhd:34' bound to instance 'ALU_src_A_1' of component 'ALU_src' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:203]
+INFO: [Synth 8-638] synthesizing module 'ALU_src' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU_src.vhd:42]
+INFO: [Synth 8-256] done synthesizing module 'ALU_src' (10#1) [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU_src.vhd:42]
+INFO: [Synth 8-3491] module 'ALU_src' declared at 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU_src.vhd:34' bound to instance 'ALU_src_B_1' of component 'ALU_src' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:211]
+INFO: [Synth 8-3491] module 'ALU_unit' declared at 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU_unit.vhd:34' bound to instance 'ALU_unit_1' of component 'ALU_unit' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:229]
+INFO: [Synth 8-638] synthesizing module 'ALU_unit' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU_unit.vhd:48]
+	Parameter register_size bound to: 32 - type: integer 
+INFO: [Synth 8-3491] module 'ALU_control' declared at 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU_control.vhd:34' bound to instance 'alu_control_1' of component 'ALU_control' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU_unit.vhd:70]
+INFO: [Synth 8-638] synthesizing module 'ALU_control' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU_control.vhd:43]
+INFO: [Synth 8-256] done synthesizing module 'ALU_control' (11#1) [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU_control.vhd:43]
+INFO: [Synth 8-3491] module 'ALU' declared at 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU.vhd:25' bound to instance 'alu_1' of component 'ALU' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU_unit.vhd:78]
+INFO: [Synth 8-638] synthesizing module 'ALU' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU.vhd:37]
+	Parameter register_size bound to: 32 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'ALU' (12#1) [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU.vhd:37]
+INFO: [Synth 8-256] done synthesizing module 'ALU_unit' (13#1) [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU_unit.vhd:48]
+INFO: [Synth 8-3491] module 'fowarding_unit' declared at 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/fowarding_unit.vhd:34' bound to instance 'Fowarding_unit_1' of component 'Fowarding_unit' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:238]
+INFO: [Synth 8-638] synthesizing module 'fowarding_unit' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/fowarding_unit.vhd:47]
+INFO: [Synth 8-256] done synthesizing module 'fowarding_unit' (14#1) [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/fowarding_unit.vhd:47]
+INFO: [Synth 8-3491] module 'EX_MEM' declared at 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/EX_MEM.vhd:34' bound to instance 'EX_MEM_1' of component 'EX_MEM' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:249]
+INFO: [Synth 8-638] synthesizing module 'EX_MEM' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/EX_MEM.vhd:49]
+INFO: [Synth 8-256] done synthesizing module 'EX_MEM' (15#1) [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/EX_MEM.vhd:49]
+INFO: [Synth 8-3491] module 'data_memory' declared at 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/data_memory.vhd:23' bound to instance 'Data_memory_1' of component 'Data_memory' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:267]
+INFO: [Synth 8-638] synthesizing module 'data_memory' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/data_memory.vhd:36]
+INFO: [Synth 8-256] done synthesizing module 'data_memory' (16#1) [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/data_memory.vhd:36]
+INFO: [Synth 8-3491] module 'MEM_WB' declared at 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/MEM_WB.vhd:34' bound to instance 'MEM_WB_1' of component 'MEM_WB' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:288]
+INFO: [Synth 8-638] synthesizing module 'MEM_WB' [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/MEM_WB.vhd:45]
+INFO: [Synth 8-256] done synthesizing module 'MEM_WB' (17#1) [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/MEM_WB.vhd:45]
+WARNING: [Synth 8-3848] Net ALU_src_B in module/entity Datapath does not have driver. [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:86]
+INFO: [Synth 8-256] done synthesizing module 'Datapath' (18#1) [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/Datapath.vhd:42]
+WARNING: [Synth 8-3331] design ID_EX has unconnected port ID_Instruction[6]
+WARNING: [Synth 8-3331] design ID_EX has unconnected port ID_Instruction[5]
+WARNING: [Synth 8-3331] design ID_EX has unconnected port ID_Instruction[4]
+WARNING: [Synth 8-3331] design ID_EX has unconnected port ID_Instruction[3]
+WARNING: [Synth 8-3331] design ID_EX has unconnected port ID_Instruction[2]
+WARNING: [Synth 8-3331] design ID_EX has unconnected port ID_Instruction[1]
+WARNING: [Synth 8-3331] design ID_EX has unconnected port ID_Instruction[0]
+WARNING: [Synth 8-3331] design imm_gen has unconnected port instruction[6]
+WARNING: [Synth 8-3331] design imm_gen has unconnected port instruction[5]
+WARNING: [Synth 8-3331] design imm_gen has unconnected port instruction[4]
+WARNING: [Synth 8-3331] design imm_gen has unconnected port instruction[3]
+WARNING: [Synth 8-3331] design imm_gen has unconnected port instruction[2]
+WARNING: [Synth 8-3331] design imm_gen has unconnected port instruction[1]
+WARNING: [Synth 8-3331] design imm_gen has unconnected port instruction[0]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[31]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[30]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[29]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[28]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[27]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[26]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[25]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[24]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[23]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[22]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[21]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[20]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[19]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[18]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[17]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[16]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[15]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[11]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[10]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[9]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[8]
+WARNING: [Synth 8-3331] design control_unit has unconnected port instruction[7]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 396.840 ; gain = 150.270
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 396.840 ; gain = 150.270
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcpg236-3
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 396.840 ; gain = 150.270
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7a35tcpg236-3
+INFO: [Synth 8-5546] ROM "output" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5587] ROM size for "i_type" is below threshold of ROM address width. It will be mapped to LUTs
+INFO: [Synth 8-5546] ROM "stall" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5545] ROM "signed_div_sig" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-5545] ROM "unsigned_div_sig" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU.vhd:56]
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU.vhd:55]
+INFO: [Synth 8-5544] ROM "AUIPC_ctrl_EX" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 438.926 ; gain = 192.355
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     65 Bit       Adders := 1     
+	   2 Input     64 Bit       Adders := 1     
+	   3 Input     64 Bit       Adders := 1     
+	   2 Input     32 Bit       Adders := 6     
+	   3 Input     32 Bit       Adders := 2     
++---XORs : 
+	   2 Input     32 Bit         XORs := 1     
++---Registers : 
+	               32 Bit    Registers := 10    
+	                8 Bit    Registers := 2     
+	                7 Bit    Registers := 1     
+	                6 Bit    Registers := 1     
+	                5 Bit    Registers := 5     
+	                3 Bit    Registers := 1     
+	                2 Bit    Registers := 3     
+	                1 Bit    Registers := 1     
++---Multipliers : 
+	                32x32  Multipliers := 3     
++---Muxes : 
+	  65 Input     32 Bit        Muxes := 1     
+	   4 Input     32 Bit        Muxes := 1     
+	   2 Input     32 Bit        Muxes := 19    
+	   7 Input     21 Bit        Muxes := 2     
+	   2 Input     16 Bit        Muxes := 1     
+	  11 Input     13 Bit        Muxes := 1     
+	   7 Input     13 Bit        Muxes := 2     
+	   7 Input     12 Bit        Muxes := 1     
+	  19 Input      5 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 2     
+	  11 Input      3 Bit        Muxes := 1     
+	   3 Input      2 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 7     
+	   4 Input      1 Bit        Muxes := 2     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module Datapath 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 4     
+	   2 Input     16 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+Module instruction_mem 
+Detailed RTL Component Info : 
++---Muxes : 
+	  65 Input     32 Bit        Muxes := 1     
+Module IF_ID 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 2     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 1     
+Module control_unit 
+Detailed RTL Component Info : 
++---Muxes : 
+	  11 Input     13 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 2     
+	  11 Input      3 Bit        Muxes := 1     
+Module imm_gen 
+Detailed RTL Component Info : 
++---Muxes : 
+	   4 Input     32 Bit        Muxes := 1     
+	   2 Input     32 Bit        Muxes := 1     
+	   7 Input     21 Bit        Muxes := 2     
+	   7 Input     13 Bit        Muxes := 2     
+	   7 Input     12 Bit        Muxes := 1     
+Module PC 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 2     
++---Registers : 
+	               32 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 2     
+Module hasard_detection_unit 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 3     
+	   4 Input      1 Bit        Muxes := 2     
+Module registers 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 4     
+Module ID_EX 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 4     
+	                8 Bit    Registers := 1     
+	                7 Bit    Registers := 1     
+	                6 Bit    Registers := 1     
+	                5 Bit    Registers := 3     
+	                3 Bit    Registers := 1     
+	                2 Bit    Registers := 1     
+Module ALU_src 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 2     
+Module ALU_control 
+Detailed RTL Component Info : 
++---Muxes : 
+	  19 Input      5 Bit        Muxes := 1     
+Module ALU 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     65 Bit       Adders := 1     
+	   2 Input     64 Bit       Adders := 1     
+	   3 Input     64 Bit       Adders := 1     
+	   2 Input     32 Bit       Adders := 4     
+	   3 Input     32 Bit       Adders := 2     
++---XORs : 
+	   2 Input     32 Bit         XORs := 1     
++---Multipliers : 
+	                32x32  Multipliers := 3     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 5     
+Module fowarding_unit 
+Detailed RTL Component Info : 
++---Muxes : 
+	   3 Input      2 Bit        Muxes := 2     
+Module EX_MEM 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 2     
+	                8 Bit    Registers := 1     
+	                5 Bit    Registers := 1     
+	                2 Bit    Registers := 1     
+Module MEM_WB 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 1     
+	                5 Bit    Registers := 1     
+	                2 Bit    Registers := 1     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+Warning: Parallel synthesis criteria is not met 
+INFO: [Synth 8-5545] ROM "signed_div_sig" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-5545] ROM "unsigned_div_sig" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU.vhd:86]
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU.vhd:84]
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/ALU.vhd:57]
+DSP Report: Generating DSP MUL_sig, operation Mode is: A*B.
+DSP Report: operator MUL_sig is absorbed into DSP MUL_sig.
+DSP Report: operator MUL_sig is absorbed into DSP MUL_sig.
+DSP Report: Generating DSP MUL_sig, operation Mode is: C+A*B.
+DSP Report: operator MUL_sig is absorbed into DSP MUL_sig.
+DSP Report: operator MUL_sig is absorbed into DSP MUL_sig.
+DSP Report: Generating DSP MUL_sig, operation Mode is: A*B.
+DSP Report: operator MUL_sig is absorbed into DSP MUL_sig.
+DSP Report: operator MUL_sig is absorbed into DSP MUL_sig.
+DSP Report: Generating DSP MUL_sig, operation Mode is: C+A*B.
+DSP Report: operator MUL_sig is absorbed into DSP MUL_sig.
+DSP Report: operator MUL_sig is absorbed into DSP MUL_sig.
+DSP Report: Generating DSP ARG, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator ARG is absorbed into DSP ARG.
+DSP Report: operator ARG is absorbed into DSP ARG.
+DSP Report: Generating DSP ARG, operation Mode is: C+A*B.
+DSP Report: operator ARG is absorbed into DSP ARG.
+DSP Report: operator ARG is absorbed into DSP ARG.
+DSP Report: Generating DSP MULHU_sig, operation Mode is: A*B.
+DSP Report: operator MULHU_sig is absorbed into DSP MULHU_sig.
+DSP Report: operator MULHU_sig is absorbed into DSP MULHU_sig.
+DSP Report: Generating DSP MULHU_sig, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator MULHU_sig is absorbed into DSP MULHU_sig.
+DSP Report: operator MULHU_sig is absorbed into DSP MULHU_sig.
+DSP Report: Generating DSP MULHU_sig, operation Mode is: A*B.
+DSP Report: operator MULHU_sig is absorbed into DSP MULHU_sig.
+DSP Report: operator MULHU_sig is absorbed into DSP MULHU_sig.
+DSP Report: Generating DSP MULHU_sig, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator MULHU_sig is absorbed into DSP MULHU_sig.
+DSP Report: operator MULHU_sig is absorbed into DSP MULHU_sig.
+DSP Report: Generating DSP ARG0, operation Mode is: A*B.
+DSP Report: operator ARG0 is absorbed into DSP ARG0.
+DSP Report: operator ARG0 is absorbed into DSP ARG0.
+DSP Report: Generating DSP ARG0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator ARG0 is absorbed into DSP ARG0.
+DSP Report: operator ARG0 is absorbed into DSP ARG0.
+DSP Report: Generating DSP ARG0, operation Mode is: A*B.
+DSP Report: operator ARG0 is absorbed into DSP ARG0.
+DSP Report: operator ARG0 is absorbed into DSP ARG0.
+DSP Report: Generating DSP ARG0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator ARG0 is absorbed into DSP ARG0.
+DSP Report: operator ARG0 is absorbed into DSP ARG0.
+DSP Report: Generating DSP alu_result1, operation Mode is: A*B.
+DSP Report: operator alu_result1 is absorbed into DSP alu_result1.
+DSP Report: operator alu_result1 is absorbed into DSP alu_result1.
+DSP Report: Generating DSP alu_result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator alu_result1 is absorbed into DSP alu_result1.
+DSP Report: operator alu_result1 is absorbed into DSP alu_result1.
+DSP Report: Generating DSP alu_result1, operation Mode is: A*B.
+DSP Report: operator alu_result1 is absorbed into DSP alu_result1.
+DSP Report: operator alu_result1 is absorbed into DSP alu_result1.
+DSP Report: Generating DSP alu_result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator alu_result1 is absorbed into DSP alu_result1.
+DSP Report: operator alu_result1 is absorbed into DSP alu_result1.
+INFO: [Synth 8-5546] ROM "control_unit_1/output" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5587] ROM size for "control_unit_1/i_type" is below threshold of ROM address width. It will be mapped to LUTs
+INFO: [Synth 8-5546] ROM "Hazard_unit_1/stall" won't be mapped to RAM because it is too sparse
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 605.289 ; gain = 358.719
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Preliminary Mapping  Report (see note below)
++------------+-------------------------+-----------+----------------------+---------------+
+|Module Name | RTL Object              | Inference | Size (Depth x Width) | Primitives    | 
++------------+-------------------------+-----------+----------------------+---------------+
+|Datapath    | Registers_1/reg_mem_reg | Implied   | 32 x 32              | RAM32M x 12   | 
++------------+-------------------------+-----------+----------------------+---------------+
+
+Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
+
+DSP: Preliminary Mapping  Report (see note below)
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping    | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|ALU         | A*B            | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ALU         | C+A*B          | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|ALU         | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ALU         | C+A*B          | 18     | 15     | 31     | -      | 47     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|ALU         | (PCIN>>17)+A*B | 16     | 15     | -      | -      | 31     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ALU         | C+A*B          | 18     | 16     | 31     | -      | 48     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|ALU         | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ALU         | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ALU         | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ALU         | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ALU         | A*B            | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ALU         | (PCIN>>17)+A*B | 15     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ALU         | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ALU         | (PCIN>>17)+A*B | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ALU         | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ALU         | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ALU         | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ALU         | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:26 ; elapsed = 00:00:25 . Memory (MB): peak = 605.289 ; gain = 358.719
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Final Mapping  Report
++------------+-------------------------+-----------+----------------------+---------------+
+|Module Name | RTL Object              | Inference | Size (Depth x Width) | Primitives    | 
++------------+-------------------------+-----------+----------------------+---------------+
+|Datapath    | Registers_1/reg_mem_reg | Implied   | 32 x 32              | RAM32M x 12   | 
++------------+-------------------------+-----------+----------------------+---------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 638.336 ; gain = 391.766
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 638.336 ; gain = 391.766
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 638.336 ; gain = 391.766
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 638.336 ; gain = 391.766
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 638.336 ; gain = 391.766
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 638.336 ; gain = 391.766
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 638.336 ; gain = 391.766
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+--------------+----------+
+|      |BlackBox name |Instances |
++------+--------------+----------+
+|1     |data_memory   |         1|
++------+--------------+----------+
+
+Report Cell Usage: 
++------+------------+------+
+|      |Cell        |Count |
++------+------------+------+
+|1     |data_memory |     1|
+|2     |BUFG        |     1|
+|3     |CARRY4      |   766|
+|4     |DSP48E1     |    17|
+|5     |LUT1        |    63|
+|6     |LUT2        |   452|
+|7     |LUT3        |   153|
+|8     |LUT4        |   570|
+|9     |LUT5        |  1315|
+|10    |LUT6        |  1894|
+|11    |MUXF7       |     1|
+|12    |RAM32M      |    12|
+|13    |FDRE        |   360|
+|14    |IBUF        |     2|
++------+------------+------+
+
+Report Instance Areas: 
++------+---------------+----------+------+
+|      |Instance       |Module    |Cells |
++------+---------------+----------+------+
+|1     |top            |          |  5638|
+|2     |  ALU_unit_1   |ALU_unit  |  3150|
+|3     |    alu_1      |ALU       |  3150|
+|4     |  EX_MEM_1     |EX_MEM    |   233|
+|5     |  ID_EX_1      |ID_EX     |  1559|
+|6     |  IF_ID_1      |IF_ID     |   379|
+|7     |  MEM_WB_1     |MEM_WB    |   107|
+|8     |  PC_1         |PC        |   138|
+|9     |  Registers_1  |registers |    12|
+|10    |  branch_verif |branch    |    25|
++------+---------------+----------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 638.336 ; gain = 391.766
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 38 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 638.336 ; gain = 391.766
+Synthesis Optimization Complete : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 638.336 ; gain = 391.766
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 796 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 657.738 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 12 instances were transformed.
+  RAM32M => RAM32M (RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMS32, RAMS32): 12 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+80 Infos, 38 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:35 ; elapsed = 00:00:35 . Memory (MB): peak = 657.754 ; gain = 411.184
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 657.754 ; gain = 0.000
+WARNING: [Constraints 18-5210] No constraints selected for write.
+Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Francis/OneDrive/Documents/ELE749-01/Laboratoires/Laboratoire_4/Integration_RISC/RISC-V_RV32EM/RISC-V_RV32EM.runs/synth_1/Datapath.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file Datapath_utilization_synth.rpt -pb Datapath_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Fri Jul 31 11:25:51 2020...
