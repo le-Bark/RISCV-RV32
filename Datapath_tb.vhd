@@ -75,6 +75,19 @@ architecture testbench of Datapath_tb is
   signal ID_src_A            : std_logic_vector(bus_size - 1 downto 0);
   signal ID_src_B            : std_logic_vector(bus_size - 1 downto 0);
   signal MEM_Result          : std_logic_vector(bus_size - 1 downto 0);
+  signal strlen              : std_logic;
+  signal instruction_fmul    : std_logic_vector(bus_size - 1 downto 0);
+  signal instruction_strlen  : std_logic_vector(bus_size - 1 downto 0);
+  signal reg_out : ramtype;
+
+
+  component instruction_mem_strlen is
+    port (
+      pc          : in  std_logic_vector(31 downto 0);
+      instruction : out std_logic_vector(31 downto 0));
+  end component instruction_mem_strlen;
+
+
 
 begin
 
@@ -89,9 +102,12 @@ begin
   waiting : process(IF_PC)
   begin
 
-    if IF_PC = x"000000F0" then
-      check_equal(WB_Result,16#44f9ae05#,"mul result");
-      check_equal(WB_Register_Rd,16#A#,"mul result write reg");
+    if IF_PC = x"000000F8" and strlen = '0' then
+      check_equal(reg_out(10),16#44f9ae05#,"mul result");
+    end if;
+
+    if IF_PC = x"00000030" and strlen = '1' then
+      check_equal(reg_out(11),16#00000008#,"mul result");
     end if;
 
   end process waiting;
@@ -101,9 +117,23 @@ begin
   begin
     test_runner_setup(runner, runner_cfg);
     reset <= '1','0' after 200 ns;
+    strlen <= '0';
     wait for 100 ns;
 
     wait until (unsigned(IF_PC) > (16#e4# + 20));
+
+    reset <= '1';
+    wait for 100 ns;
+    wait for 100 ns;
+    wait for 100 ns;
+    wait for 100 ns;
+    reset <= '0';
+    wait for 100 ns;
+    strlen <= '1';
+
+    wait for 100 ns;
+
+    wait until (unsigned(IF_PC) > (16#30# + 20));
 
 
     test_runner_cleanup(runner);
@@ -113,7 +143,15 @@ begin
   Instruction_memory_1 : instruction_mem
     port map (
       PC          => IF_PC,
-      Instruction => IF_Instruction);
+      Instruction => instruction_fmul);
+
+  Instruction_memory_2 : instruction_mem_strlen
+    port map (
+      PC          => IF_PC,
+      Instruction => instruction_strlen);
+
+      IF_Instruction <= instruction_strlen when strlen = '1' else
+                        instruction_fmul;
 
   IF_ID_1 : IF_ID
     port map (
@@ -173,7 +211,8 @@ begin
       write_reg   => WB_Register_Rd,
       write_data  => WB_Result,
       read_data_1 => ID_read_data_1,
-      read_data_2 => ID_read_data_2);
+      read_data_2 => ID_read_data_2,
+      reg_out => reg_out);
         
 
 
@@ -204,9 +243,9 @@ begin
       EX_WB              => EX_WB,
       EX_funct3          => EX_funct3,
       EX_funct7          => EX_funct7,
+      EX_read_data_1     => EX_read_data_1,
+      EX_read_data_2     => EX_read_data_2,
       EX_PC              => EX_PC,
-      EX_Register_Rs1    => EX_Register_Rs1,
-      EX_Register_Rs2    => EX_Register_Rs2,
       EX_Register_Rd     => EX_Register_Rd);
 
   ALU_src_A_1 : ALU_src
@@ -262,7 +301,7 @@ begin
       EX_M            => EX_M,
       EX_WB           => EX_WB,
       AluResult_sig   => AluResult_sig,
-      ALU_src_B       => ALU_src_B,
+      ALU_src_B       => EX_read_data_2,
       EX_Register_Rd  => EX_Register_Rd,
       MEM_M           => MEM_M,
       MEM_WB          => MEM_WB_sig,

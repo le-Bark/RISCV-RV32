@@ -32,6 +32,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 package pack is
+
+  type ramtype is array (31 downto 0) of std_logic_vector(31 downto 0);
+
   component PC is
     Port ( 
       clk : in std_logic;
@@ -94,14 +97,15 @@ package pack is
 
   component Registers is
     Port (
-      clk         : in  std_logic;
-      reg_write   : in  std_logic;
-      read_reg_1  : in  std_logic_vector(4 downto 0);
-      read_reg_2  : in  std_logic_vector(4 downto 0);
-      write_reg   : in  std_logic_vector(4 downto 0);
-      write_data  : in  std_logic_vector(31 downto 0);
-      read_data_1 : out std_logic_vector(31 downto 0);
-      read_data_2 : out std_logic_vector(31 downto 0));
+      clk : in std_logic;
+      reg_write : in std_logic;
+      read_reg_1 : in std_logic_vector(4 downto 0);
+      read_reg_2 : in std_logic_vector(4 downto 0);
+      write_reg  : in std_logic_vector(4 downto 0);
+      write_data : in std_logic_vector(31 downto 0);
+      read_data_1: out std_logic_vector(31 downto 0);
+      read_data_2: out std_logic_vector(31 downto 0);
+      reg_out: out ramtype);
   end component Registers;
 
   component branch is
@@ -206,6 +210,5 @@ package pack is
       WB_result : out std_logic_vector(31 downto 0);
       WB_Register_Rd : out std_logic_vector(4 downto 0));
   end component MEM_WB;
-
-
+  
 end package pack;

@@ -28,7 +28,7 @@ end instruction_mem;
 architecture mem of instruction_mem is
 	constant mem_size : positive := 64;
 	TYPE romtype is array (0 to mem_size) of std_logic_vector(31 downto 0);
-		constant instruction_rom : romtype := (
+		constant instruction_rom : romtype := (		
 			0 => X"00400517" ,
 			1 => X"00052503" ,
 			2 => X"00400597" ,
@@ -93,7 +93,7 @@ architecture mem of instruction_mem is
 			61 => X"00000000" ,
 			62 => X"00000000" ,
 			63 => X"00000000" ,
-			64 => X"00000000" 			
+			64 => X"00000000" 				
 						);
 
 begin

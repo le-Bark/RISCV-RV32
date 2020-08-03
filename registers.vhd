@@ -17,6 +17,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 use IEEE.NUMERIC_STD.ALL;
+use work.pack.all;
 
 entity registers is
 	port (
@@ -27,12 +28,12 @@ entity registers is
 		write_reg  : in std_logic_vector(4 downto 0);
 		write_data : in std_logic_vector(31 downto 0);
 		read_data_1: out std_logic_vector(31 downto 0);
-		read_data_2: out std_logic_vector(31 downto 0)
+		read_data_2: out std_logic_vector(31 downto 0);
+		reg_out: out ramtype
 	);
 end registers;
 
 	architecture reg of registers is
-	type ramtype is array (31 downto 0) of std_logic_vector(31 downto 0);
 	signal reg_mem : ramtype;
 
 	begin
@@ -45,7 +46,7 @@ end registers;
 		end if;
 	end if;
 	end process;
-
+	reg_out <= reg_mem;
 	read_data_1 <= (others => '0') when to_integer(unsigned(read_reg_1)) = 0 else
 					write_data when ( (reg_write = '1') and (write_reg = read_reg_1)) else
 					reg_mem(to_integer(unsigned(read_reg_1)));

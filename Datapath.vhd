@@ -36,7 +36,8 @@ entity Datapath is
 		constant bus_size : integer := 32
 		);
     Port ( clk : in std_logic;
-           reset : in std_logic);
+           reset : in std_logic;
+           reg_out : out ramtype);
 end Datapath;
 
 architecture Datapath_arch of Datapath is
@@ -161,7 +162,8 @@ begin
       write_reg   => WB_Register_Rd,
       write_data  => WB_Result,
       read_data_1 => ID_read_data_1,
-      read_data_2 => ID_read_data_2);
+      read_data_2 => ID_read_data_2,
+      reg_out => reg_out);
         
 
 
@@ -250,7 +252,7 @@ begin
       EX_M            => EX_M,
       EX_WB           => EX_WB,
       AluResult_sig   => AluResult_sig,
-      ALU_src_B       => ALU_src_B,
+      ALU_src_B       => EX_read_data_2,
       EX_Register_Rd  => EX_Register_Rd,
       MEM_M           => MEM_M,
       MEM_WB          => MEM_WB_sig,
