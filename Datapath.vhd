@@ -58,8 +58,7 @@ architecture Datapath_arch of Datapath is
   signal MEM_store           : std_logic_vector(2 downto 0);
   signal EX_ctrl             : std_logic_vector(5 downto 0);
   signal EX_EX               : std_logic_vector(5 downto 0);
-  signal EX_Register_Rs1     : std_logic_vector(4 downto 0);
-  signal EX_Register_Rs2     : std_logic_vector(4 downto 0);
+
   signal EX_Register_Rd      : std_logic_vector(4 downto 0);
   signal MEM_Register_Rd     : std_logic_vector(4 downto 0);
   signal WB_Register_Rd      : std_logic_vector(4 downto 0);
@@ -196,8 +195,6 @@ begin
       EX_read_data_1     => EX_read_data_1,
       EX_read_data_2     => EX_read_data_2,
       EX_PC              => EX_PC,
-      EX_Register_Rs1    => EX_Register_Rs1,
-      EX_Register_Rs2    => EX_Register_Rs2,
       EX_Register_Rd     => EX_Register_Rd);
 
   ALU_src_A_1 : ALU_src

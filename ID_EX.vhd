@@ -49,8 +49,6 @@ entity ID_EX is
            EX_read_data_1 : out std_logic_vector(31 downto 0);
            EX_read_data_2 : out std_logic_vector(31 downto 0);
            EX_PC : out std_logic_vector(31 downto 0);
-           EX_Register_Rs1 : out std_logic_vector(4 downto 0);
-           EX_Register_Rs2 : out std_logic_vector(4 downto 0);
            EX_Register_Rd : out std_logic_vector(4 downto 0));
 end ID_EX;
 
@@ -69,8 +67,6 @@ begin
           EX_funct7 <=(others => '0');
           EX_read_data_1 <=(others => '0');
           EX_read_data_2 <=(others => '0');
-          EX_Register_Rs1 <=(others => '0');
-          EX_Register_Rs2 <=(others => '0');
           EX_Register_Rd <=(others => '0');
           EX_SignImmSh <=(others => '0');
           EX_PC <=(others => '0');
@@ -82,8 +78,6 @@ begin
           EX_funct7 <= ID_Instruction (31 downto 25);
           EX_read_data_1 <=  ID_read_data_1;
           EX_read_data_2 <=  ID_read_data_2; 
-          EX_Register_Rs1 <=  ID_Instruction (19 downto 15);
-          EX_Register_Rs2 <=  ID_Instruction (24 downto 20);
           EX_Register_Rd <=  ID_Instruction (11 downto 7);
           EX_SignImmSh <= SignImmSh;
           EX_PC <= ID_PC;

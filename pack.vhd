@@ -132,8 +132,6 @@ package pack is
       EX_read_data_1 : out std_logic_vector(31 downto 0);
       EX_read_data_2 : out std_logic_vector(31 downto 0);
       EX_PC : out std_logic_vector(31 downto 0);
-      EX_Register_Rs1 : out std_logic_vector(4 downto 0);
-      EX_Register_Rs2 : out std_logic_vector(4 downto 0);
       EX_Register_Rd : out std_logic_vector(4 downto 0));
   end component ID_EX;
 
